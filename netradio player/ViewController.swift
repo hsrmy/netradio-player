@@ -24,7 +24,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     let navi = UINavigationController(rootViewController: agqr)
                     self.present(navi, animated: true, completion: nil) // A&Gに飛ぶ
                 } else if select == "onsen" { // 前回終了時の放送局が音泉の場合
-                    setUI()//選局画面のUIを表示
+                    let onsen = OnsenController()
+                    let navi = UINavigationController(rootViewController: onsen)
+                    self.present(navi, animated: true, completion: nil) // 音泉に飛ぶ
                 } else if select == "hibiki" { // 前回終了時の放送局が響の場合
                     setUI()//選局画面のUIを表示
                 }
@@ -73,9 +75,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if indexPath.row == 0 {
             let agqr = AgqrController()
             let navi = UINavigationController(rootViewController: agqr)
-            self.present(navi, animated: true, completion: nil)
-        } else {
-            
+            self.present(navi, animated: true, completion: nil) // A&Gに飛ぶ
+        } else if indexPath.row == 1 {
+            let onsen = OnsenController()
+            let navi = UINavigationController(rootViewController: onsen)
+            self.present(navi, animated: true, completion: nil) // 音泉に飛ぶ
         }
     }
     

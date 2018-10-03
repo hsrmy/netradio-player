@@ -13,6 +13,7 @@
 		86EF00152165572D00CB76A9 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 86EF00142165572D00CB76A9 /* Settings.bundle */; };
 		86EF001721655A5600CB76A9 /* AgqrController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF001621655A5600CB76A9 /* AgqrController.swift */; };
 		86EF001B21655A9E00CB76A9 /* empty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86EF001921655A9E00CB76A9 /* empty.cpp */; };
+		86EF001E21655D1300CB76A9 /* OnsenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF001D21655D1300CB76A9 /* OnsenController.swift */; };
 		86EFFFE7216553FB00CB76A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EFFFE6216553FB00CB76A9 /* AppDelegate.swift */; };
 		86EFFFE9216553FB00CB76A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EFFFE8216553FB00CB76A9 /* ViewController.swift */; };
 		86EFFFEE216553FE00CB76A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EFFFED216553FE00CB76A9 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		86EF001821655A9D00CB76A9 /* netradio player-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "netradio player-Bridging-Header.h"; sourceTree = "<group>"; };
 		86EF001921655A9E00CB76A9 /* empty.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = empty.cpp; sourceTree = "<group>"; };
 		86EF001A21655A9E00CB76A9 /* empty.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = empty.hpp; sourceTree = "<group>"; };
+		86EF001D21655D1300CB76A9 /* OnsenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenController.swift; sourceTree = "<group>"; };
 		86EFFFE3216553FB00CB76A9 /* netradio player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "netradio player.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EFFFE6216553FB00CB76A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86EFFFE8216553FB00CB76A9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -131,13 +133,14 @@
 			children = (
 				86EFFFE6216553FB00CB76A9 /* AppDelegate.swift */,
 				86EFFFE8216553FB00CB76A9 /* ViewController.swift */,
+				86EF001D21655D1300CB76A9 /* OnsenController.swift */,
+				86EF001621655A5600CB76A9 /* AgqrController.swift */,
+				86EF00142165572D00CB76A9 /* Settings.bundle */,
 				86EF001921655A9E00CB76A9 /* empty.cpp */,
 				86EF001A21655A9E00CB76A9 /* empty.hpp */,
-				86EF001621655A5600CB76A9 /* AgqrController.swift */,
 				86EFFFED216553FE00CB76A9 /* Assets.xcassets */,
 				86EFFFEF216553FE00CB76A9 /* LaunchScreen.storyboard */,
 				86EFFFF2216553FE00CB76A9 /* Info.plist */,
-				86EF00142165572D00CB76A9 /* Settings.bundle */,
 				86EF001821655A9D00CB76A9 /* netradio player-Bridging-Header.h */,
 			);
 			path = "netradio player";
@@ -425,6 +428,7 @@
 				86EFFFE9216553FB00CB76A9 /* ViewController.swift in Sources */,
 				86EF001B21655A9E00CB76A9 /* empty.cpp in Sources */,
 				86EF001721655A5600CB76A9 /* AgqrController.swift in Sources */,
+				86EF001E21655D1300CB76A9 /* OnsenController.swift in Sources */,
 				86EFFFE7216553FB00CB76A9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
