@@ -206,6 +206,7 @@
 				86EFFFE0216553FB00CB76A9 /* Frameworks */,
 				86EFFFE1216553FB00CB76A9 /* Resources */,
 				9C5A5C38886B50316F8476AD /* [CP] Embed Pods Frameworks */,
+				86EF001C21655BAE00CB76A9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -307,6 +308,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		86EF001C21655BAE00CB76A9 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#APP_BRANCH=$(git branch|head -n 1|awk '{print $2}')\n#/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:1:DefaultValue git:${APP_BRANCH}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Settings.bundle/Root.plist\"\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:3:DefaultValue 1.0.0\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Settings.bundle/Root.plist\"\n\n#BUILD=$(git log --oneline|head -n 1|awk '{print $1}')\nBUILD=$(($(git log --oneline|wc -l)-1))\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:4:DefaultValue ${BUILD}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Settings.bundle/Root.plist\"\n\n";
+		};
 		888EF385DB5D56ACE1AF50B9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
