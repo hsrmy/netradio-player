@@ -20,9 +20,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             if defaults.object(forKey: "last") != nil { // 前回終了時の放送局が保存されている場合
                 let select = defaults.string(forKey: "last")
                 if select == "agqr" { // 前回終了時の放送局がA&Gの場合
-//                    let agqr = AgqrController()
-//                    let navi = UINavigationController(rootViewController: agqr)
-//                    self.present(navi, animated: true, completion: nil) // A&Gに飛ぶ
+                    let agqr = AgqrController()
+                    let navi = UINavigationController(rootViewController: agqr)
+                    self.present(navi, animated: true, completion: nil) // A&Gに飛ぶ
                 } else if select == "onsen" { // 前回終了時の放送局が音泉の場合
                     setUI()//選局画面のUIを表示
                 } else if select == "hibiki" { // 前回終了時の放送局が響の場合
@@ -71,9 +71,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.row == 0 {
-//            let agqr = AgqrController()
-//            let navi = UINavigationController(rootViewController: agqr)
-//            self.present(navi, animated: true, completion: nil)
+            let agqr = AgqrController()
+            let navi = UINavigationController(rootViewController: agqr)
+            self.present(navi, animated: true, completion: nil)
         } else {
             
         }
