@@ -115,9 +115,5 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.view.addSubview(stationTable) // テーブルのセット
     }
-    
-    func setIndicator () {
-        
-    }
 }
 

@@ -112,7 +112,7 @@ class LanchScreenController: UIViewController {
                 var gethibiki = false
                 let settingonsen = Date(timeIntervalSinceNow: TimeInterval(-60*60*24*defaults.integer(forKey: "onsen_time")))
                 let latestonsen = formatter.date(from: defaults.string(forKey: "whenOnsenDownload")!)
-                if settingonsen > latestonsen! { // 音泉の最終データ取得日が設定で設定された日数を超えている場合
+                if settingonsen < latestonsen! { // 音泉の最終データ取得日が設定で設定された日数を超えている場合
                     if defaults.bool(forKey: "onsen_skip") == false { // デバックモード・音泉取得スキップがOFFの場合
                         getonsen = true
                         
@@ -120,7 +120,7 @@ class LanchScreenController: UIViewController {
                 } // L.115
                 let settinghibiki = Date(timeIntervalSinceNow: TimeInterval(-60*60*24*defaults.integer(forKey: "hibiki_time")))
                 let latesthibiki = formatter.date(from: defaults.string(forKey: "whenHibikiDownload")!)
-                if settinghibiki > latesthibiki! { // 響の最終データ取得日が設定で設定された日数を超えている場合
+                if settinghibiki < latesthibiki! { // 響の最終データ取得日が設定で設定された日数を超えている場合
                     if defaults.bool(forKey: "hibiki_skip") == false { // デバックモード・響取得スキップがOFFの場合
                         gethibiki = true
                         
@@ -146,12 +146,12 @@ class LanchScreenController: UIViewController {
                     }
                     DispatchQueue.main.async {
                         self.detail.text = "音泉の番組情報を取得完了 (2/4)"
-                        self.progressBar.setProgress(0.6, animated: true)
+                        self.progressBar.setProgress(0.5, animated: true)
                     }
                     self.hibikilist = self.getHibikiList()
                     DispatchQueue.main.async {
                         self.detail.text = "響の番組情報を取得完了 (3/4)"
-                        self.progressBar.setProgress(0.8, animated: true)
+                        self.progressBar.setProgress(0.75, animated: true)
                     }
                     self.hibikilist = self.getHibikiList()
                     self.hibikiInfo = [String:Array<Any>]()
@@ -230,7 +230,9 @@ class LanchScreenController: UIViewController {
                 }
                 DispatchQueue.main.async {
                     self.indicator.stopAnimating()
-                    self.present(ViewController(), animated: true, completion: nil)
+                    let next = ViewController()
+                    let navi = UINavigationController(rootViewController: next)
+                    self.present(navi, animated: true, completion: nil)
                 }
             } // L.110
         } //L.53
