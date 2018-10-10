@@ -9,6 +9,7 @@ target 'netradio player' do
   pod 'MobileVLCKit'
   pod 'Toast-Swift', '~> 4.0.0'
   pod 'Fuzi'
+  pod 'ReachabilitySwift'
 
   target 'netradio playerTests' do
     inherit! :search_paths

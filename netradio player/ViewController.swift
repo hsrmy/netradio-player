@@ -28,13 +28,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     let navi = UINavigationController(rootViewController: onsen)
                     self.present(navi, animated: true, completion: nil) // 音泉に飛ぶ
                 } else if select == "hibiki" { // 前回終了時の放送局が響の場合
-                    setUI()//選局画面のUIを表示
+                    setUI()// 選局画面のUIを表示
                 }
             } else {
-                setUI()//選局画面のUIを表示
+                setUI()// 選局画面のUIを表示
             }
         } else { // 前回終了時と同じ放送局を選局するがOFFの場合
-            setUI() //選局画面のUIを表示
+            setUI() // 選局画面のUIを表示
         }
     }
     
@@ -114,6 +114,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         stationTable.rowHeight = framesize/3 // セルの高さをフレームの高さの3分の1に
         
         self.view.addSubview(stationTable) // テーブルのセット
+    }
+    
+    func setIndicator () {
+        
     }
 }
 

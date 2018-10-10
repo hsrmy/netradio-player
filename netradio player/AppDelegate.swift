@@ -12,12 +12,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var onsenList:[String:Array<Any>] = [String:Array<Any>]()
+    var onsenInfo:[String:Array<Any>] = [String:Array<Any>]()
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let navbarController: UINavigationController? = UINavigationController(rootViewController: ViewController())
+        let navbarController: UINavigationController? = UINavigationController(rootViewController: LanchScreenController())
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = navbarController
