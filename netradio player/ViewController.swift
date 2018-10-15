@@ -28,7 +28,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     let navi = UINavigationController(rootViewController: onsen)
                     self.present(navi, animated: true, completion: nil) // 音泉に飛ぶ
                 } else if select == "hibiki" { // 前回終了時の放送局が響の場合
-                    setUI()// 選局画面のUIを表示
+                    let hibiki = HibikiController()
+                    let navi = UINavigationController(rootViewController: hibiki)
+                    self.present(navi, animated: true, completion: nil) // 響に飛ぶ
                 }
             } else {
                 setUI()// 選局画面のUIを表示
@@ -80,6 +82,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let onsen = OnsenController()
             let navi = UINavigationController(rootViewController: onsen)
             self.present(navi, animated: true, completion: nil) // 音泉に飛ぶ
+        } else if indexPath.row == 2 {
+            let hibiki = HibikiController()
+            let navi = UINavigationController(rootViewController: hibiki)
+            self.present(navi, animated: true, completion: nil) // 響に飛ぶ
         }
     }
     

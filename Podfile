@@ -9,6 +9,7 @@ target 'netradio player' do
   pod 'MobileVLCKit'
   pod 'Toast-Swift', '~> 4.0.0'
   pod 'Fuzi'
+  #pod 'XLPagerTabStrip', '~> 8.0'
   pod 'ReachabilitySwift'
 
   target 'netradio playerTests' do

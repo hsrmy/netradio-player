@@ -232,11 +232,16 @@ class LanchScreenController: UIViewController {
                     self.indicator.stopAnimating()
                     let next = ViewController()
                     let navi = UINavigationController(rootViewController: next)
-                    self.present(navi, animated: true, completion: nil)
+                    self.present(navi, animated: false, completion: nil)
                 }
             } // L.110
         } //L.53
     } // viewDidLoad
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
     func setwaitLabel() {
         waitlabel = UILabel()
