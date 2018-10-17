@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class HibikiMonController: UIViewController, IndicatorInfoProvider, UICollectionViewDataSource,UICollectionViewDelegate {
+class HibikiMonController: UIViewController, IndicatorInfoProvider, UICollectionViewDataSource, UICollectionViewDelegate {
     let list = UserDefaults.standard.object(forKey: "hibikilist") as! [String:Array<String>]
     let rawinfo = UserDefaults.standard.object(forKey: "hibikiInfo") as! [String:Array<Any>]
     var info: [String:Array<Any>]!
