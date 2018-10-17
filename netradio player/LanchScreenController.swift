@@ -72,8 +72,13 @@ class LanchScreenController: UIViewController {
                     DispatchQueue.main.async {
                         self.detail.text = "音泉の番組情報を取得完了 (3/5)"
                         self.progressBar.setProgress(0.6, animated: true)
+                        // データをダウンロードしてきた日付を保存
+                        defaults.set(formatter.string(from: Date()), forKey: "whenOnsenDownload")
+                        defaults.set(self.onsenlist, forKey: "onsenlist") // 音泉の番組一覧を保存
+                        defaults.set(self.onseninfo, forKey: "onseninfo") // 音泉の番組詳細を保存
                     } // L.72
-                } else if defaults.bool(forKey: "hibiki_skip") == false { // L.55
+                }
+                if defaults.bool(forKey: "hibiki_skip") == false { // L.55
                     self.hibikilist = self.getHibikiList()
                     DispatchQueue.main.async {
                         self.detail.text = "響の番組情報を取得完了 (4/5)"
@@ -95,18 +100,20 @@ class LanchScreenController: UIViewController {
                     DispatchQueue.main.async {
                         self.detail.text = "響の番組情報を取得完了 (5/5)"
                         self.progressBar.setProgress(1.0, animated: true)
+                        // データをダウンロードしてきた日付を保存
+                        defaults.set(formatter.string(from: Date()), forKey: "whenHibikiDownload")
+                        defaults.set(self.hibikilist, forKey: "hibikilist") // 響の番組一覧を保存
+                        defaults.set(self.hibikiInfo, forKey: "hibikiInfo") // 響の番組詳細を保存
                     } //L.95
                 } // L.76
-                    
-                // データをダウンロードしてきた日付を保存
-                defaults.set(formatter.string(from: Date()), forKey: "whenOnsenDownload")
-                defaults.set(formatter.string(from: Date()), forKey: "whenHibikiDownload")
-
-                defaults.set(self.onsenlist, forKey: "onsenlist") // 音泉の番組一覧を保存
-                defaults.set(self.onseninfo, forKey: "onseninfo") // 音泉の番組詳細を保存
-                defaults.set(self.hibikilist, forKey: "hibikilist") // 響の番組一覧を保存
-                defaults.set(self.hibikiInfo, forKey: "hibikiInfo") // 響の番組詳細を保存
-                defaults.set(true, forKey: "hasLaunch") //  初回起動処理が完了している事を保存
+                
+                DispatchQueue.main.async {
+                    defaults.set(true, forKey: "hasLaunch") //  初回起動処理が完了している事を保存
+                    self.indicator.stopAnimating()
+                    let next = ViewController()
+                    let navi = UINavigationController(rootViewController: next)
+                    self.present(navi, animated: false, completion: nil)
+                }
             } else { // 2回目以降 // L.54
                 var getonsen = false
                 var gethibiki = false
@@ -372,6 +379,8 @@ class LanchScreenController: UIViewController {
                         print("error:\(error.localizedDescription)")
                     }
                 }
+            } else {
+                print("error:\(String(describing: error?.localizedDescription))")
             }
             condition.signal()
             condition.unlock()

@@ -10,7 +10,10 @@ import UIKit
 import XLPagerTabStrip
 
 class HibikiMonController: UIViewController, IndicatorInfoProvider, UICollectionViewDataSource,UICollectionViewDelegate {
-
+    let list = UserDefaults.standard.object(forKey: "hibikilist") as! [String:Array<String>]
+    let rawinfo = UserDefaults.standard.object(forKey: "hibikiInfo") as! [String:Array<Any>]
+    var info: [String:Array<Any>]!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -38,6 +41,16 @@ class HibikiMonController: UIViewController, IndicatorInfoProvider, UICollection
         collectionView.delegate = self
         
         self.view.addSubview(collectionView)
+        
+        self.info = [String:Array<Any>]()
+        for (key,value) in rawinfo {
+            if value.count > 0 {
+                if info[key] == nil {
+                    info[key] = []
+                }
+                info[key] = [value[0] as! String, value[1] as! String, value[2] as! String, value[3] as! String, value[4] as! Data]
+            }
+        }
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -45,7 +58,7 @@ class HibikiMonController: UIViewController, IndicatorInfoProvider, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return list["1"]?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -54,16 +67,25 @@ class HibikiMonController: UIViewController, IndicatorInfoProvider, UICollection
         cell.contentView.layer.borderColor = UIColor.black.cgColor
         cell.contentView.layer.borderWidth = 1.0
         
-        let label = UILabel()
-        label.center = cell.contentView.center
-        label.text = indexPath.row.description
-        label.sizeToFit()
+        let prog = list["1"]?[indexPath.row]
+        
+        let thumbnail = UIImage(data: info[prog!]?[4] as! Data)
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: cell.contentView.frame.width, height: cell.contentView.frame.height/2))
+        imageView.image = thumbnail
+        cell.contentView.addSubview(imageView)
+        
+        let label = UILabel(frame: CGRect(x: 0, y: cell.contentView.frame.height/2, width: cell.contentView.frame.width, height: cell.contentView.frame.height/2))
+        label.textAlignment = .center
+        label.text = "\(info[prog!]?[0] as! String)\n\n\(info[prog!]?[1] as! String)"
+        label.numberOfLines = 0
         cell.contentView.addSubview(label)
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath)
+//        let cell = collectionView.cellForItem(at: indexPath)
+        let prog = list["1"]?[indexPath.row]
+        print(prog!)
     }
 }
