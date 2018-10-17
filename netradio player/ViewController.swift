@@ -28,7 +28,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     let navi = UINavigationController(rootViewController: onsen)
                     self.present(navi, animated: true, completion: nil) // 音泉に飛ぶ
                 } else if select == "hibiki" { // 前回終了時の放送局が響の場合
-                    let hibiki = HibikiController()
+                    let hibiki = HibikiListController()
                     let navi = UINavigationController(rootViewController: hibiki)
                     self.present(navi, animated: true, completion: nil) // 響に飛ぶ
                 }
@@ -83,7 +83,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let navi = UINavigationController(rootViewController: onsen)
             self.present(navi, animated: true, completion: nil) // 音泉に飛ぶ
         } else if indexPath.row == 2 {
-            let hibiki = HibikiController()
+            let hibiki = HibikiListController()
             let navi = UINavigationController(rootViewController: hibiki)
             self.present(navi, animated: true, completion: nil) // 響に飛ぶ
         }

@@ -9,8 +9,9 @@ target 'netradio player' do
   pod 'MobileVLCKit'
   pod 'Toast-Swift', '~> 4.0.0'
   pod 'Fuzi'
-  #pod 'XLPagerTabStrip', '~> 8.0'
+  pod 'XLPagerTabStrip', :git => 'https://github.com/xmartlabs/XLPagerTabStrip.git', :branch => 'master'
   pod 'ReachabilitySwift'
+  pod 'FontAwesome.swift'
 
   target 'netradio playerTests' do
     inherit! :search_paths
