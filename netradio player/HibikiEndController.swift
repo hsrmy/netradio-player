@@ -53,6 +53,11 @@ class HibikiEndController: UIViewController, IndicatorInfoProvider, UICollection
         }
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "土曜・日曜")
     }

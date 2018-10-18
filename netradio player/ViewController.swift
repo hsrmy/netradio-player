@@ -79,10 +79,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let navi = UINavigationController(rootViewController: agqr)
             self.present(navi, animated: true, completion: nil) // A&Gに飛ぶ
         } else if indexPath.row == 1 {
+            DispatchQueue.main.async {
+                self.view.makeToast("\"インターネットラジオステーション＜音泉＞\"を選局します\nしばらくお待ち下さい", duration: 3)
+            }
             let onsen = OnsenController()
             let navi = UINavigationController(rootViewController: onsen)
             self.present(navi, animated: true, completion: nil) // 音泉に飛ぶ
         } else if indexPath.row == 2 {
+            DispatchQueue.main.async {
+                self.view.makeToast("\"響 - HiBiKi Radio Station\"を選局します\nしばらくお待ち下さい", duration: 3)
+            }
             let hibiki = HibikiListController()
             let navi = UINavigationController(rootViewController: hibiki)
             self.present(navi, animated: true, completion: nil) // 響に飛ぶ
