@@ -91,10 +91,12 @@ class LanchScreenController: UIViewController {
                         for j in (0...(self.hibikilist[day]?.count)!-1) {
                             let name: String = (self.hibikilist[day]?[j])!
                             let data = self.getHibikiInfo(id: name)
-                            if self.hibikiInfo[name] == nil {
-                                self.hibikiInfo[name] = []
-                            } // L.89
-                            self.hibikiInfo[name] = data
+                            if data.isEmpty == false {
+                                if self.hibikiInfo[name] == nil {
+                                    self.hibikiInfo[name] = []
+                                } // L.89
+                                self.hibikiInfo[name] = data
+                            }
                         } // L.86
                     } // L.84
                     DispatchQueue.main.async {
@@ -114,6 +116,7 @@ class LanchScreenController: UIViewController {
                     let navi = UINavigationController(rootViewController: next)
                     self.present(navi, animated: false, completion: nil)
                 }
+                print(self.hibikiInfo)
             } else { // 2回目以降 // L.54
                 var getonsen = false
                 var gethibiki = false
@@ -167,10 +170,12 @@ class LanchScreenController: UIViewController {
                         for j in (0...(self.hibikilist[day]?.count)!-1) {
                             let name: String = (self.hibikilist[day]?[j])!
                             let data = self.getHibikiInfo(id: name)
-                            if self.hibikiInfo[name] == nil {
-                                self.hibikiInfo[name] = []
+                            if data.isEmpty == false {
+                                if self.hibikiInfo[name] == nil {
+                                    self.hibikiInfo[name] = []
+                                }
+                                self.hibikiInfo[name] = data
                             }
-                            self.hibikiInfo[name] = data
                         }
                     }
                     DispatchQueue.main.async {
@@ -351,6 +356,7 @@ class LanchScreenController: UIViewController {
         struct List:Codable {
             var day_of_week: Int
             var access_id: String
+            var latest_episode_id: Int?
         }
         
         let condition = NSCondition()
@@ -367,12 +373,14 @@ class LanchScreenController: UIViewController {
                     do {
                         let decode:[List] = try JSONDecoder().decode([List].self, from: rawdata.data(using: .utf8)! )
                         for prog in decode{
-                            let dow = prog.day_of_week.description
-                            let access_id = prog.access_id
-                            if tmp[dow] == nil {
-                                tmp[dow] = []
+                            if prog.latest_episode_id != nil {
+                                let dow = prog.day_of_week.description
+                                let access_id = prog.access_id
+                                if tmp[dow] == nil {
+                                    tmp[dow] = []
+                                }
+                                tmp[dow]?.append(access_id)
                             }
-                            tmp[dow]?.append(access_id)
                         }
                         list = tmp
                     } catch {
