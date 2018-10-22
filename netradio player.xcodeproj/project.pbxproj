@@ -26,6 +26,7 @@
 		86C3684B217DEA3D008428D6 /* OnsenFriController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3684A217DEA3D008428D6 /* OnsenFriController.swift */; };
 		86C3684D217DEA6B008428D6 /* OnsenEndController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3684C217DEA6B008428D6 /* OnsenEndController.swift */; };
 		86C3684F217DEAF1008428D6 /* OnsenAllController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3684E217DEAF1008428D6 /* OnsenAllController.swift */; };
+		86C36851217E0672008428D6 /* OnsenPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C36850217E0672008428D6 /* OnsenPlayerController.swift */; };
 		86EF0007216553FE00CB76A9 /* netradio_playerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF0006216553FE00CB76A9 /* netradio_playerUITests.swift */; };
 		86EF00152165572D00CB76A9 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 86EF00142165572D00CB76A9 /* Settings.bundle */; };
 		86EF001721655A5600CB76A9 /* AgqrController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF001621655A5600CB76A9 /* AgqrController.swift */; };
@@ -86,6 +87,7 @@
 		86C3684A217DEA3D008428D6 /* OnsenFriController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenFriController.swift; sourceTree = "<group>"; };
 		86C3684C217DEA6B008428D6 /* OnsenEndController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenEndController.swift; sourceTree = "<group>"; };
 		86C3684E217DEAF1008428D6 /* OnsenAllController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenAllController.swift; sourceTree = "<group>"; };
+		86C36850217E0672008428D6 /* OnsenPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenPlayerController.swift; sourceTree = "<group>"; };
 		86EF0002216553FE00CB76A9 /* netradio playerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "netradio playerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF0006216553FE00CB76A9 /* netradio_playerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = netradio_playerUITests.swift; sourceTree = "<group>"; };
 		86EF0008216553FE00CB76A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				86FAFC5C2174612F00201153 /* DrawerMenuController.swift */,
 				86EFFFE8216553FB00CB76A9 /* ViewController.swift */,
 				86EF001D21655D1300CB76A9 /* OnsenListController.swift */,
+				86C36850217E0672008428D6 /* OnsenPlayerController.swift */,
 				86C3684E217DEAF1008428D6 /* OnsenAllController.swift */,
 				86C3684C217DEA6B008428D6 /* OnsenEndController.swift */,
 				86C3684A217DEA3D008428D6 /* OnsenFriController.swift */,
@@ -520,6 +523,7 @@
 				86C3684F217DEAF1008428D6 /* OnsenAllController.swift in Sources */,
 				86C3684D217DEA6B008428D6 /* OnsenEndController.swift in Sources */,
 				86EF001721655A5600CB76A9 /* AgqrController.swift in Sources */,
+				86C36851217E0672008428D6 /* OnsenPlayerController.swift in Sources */,
 				86FAFC672174940900201153 /* HibikiListController.swift in Sources */,
 				86EF001E21655D1300CB76A9 /* OnsenListController.swift in Sources */,
 				86EFFFE7216553FB00CB76A9 /* AppDelegate.swift in Sources */,

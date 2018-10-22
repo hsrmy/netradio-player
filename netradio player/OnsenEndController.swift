@@ -86,4 +86,16 @@ class OnsenEndController: UIViewController, IndicatorInfoProvider, UICollectionV
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //        let cell = collectionView.cellForItem(at: indexPath)
+        let prog = list["mon"]?[indexPath.row]
+        let title = info[prog!]?[0] as! String
+        let url = info[prog!]?[2] as! String
+        let thumbnail = info[prog!]?[3] as! Data
+        
+        let onsen = OnsenPlayerController(name: title, url: url, thumbnail: thumbnail)
+        let navi = UINavigationController(rootViewController: onsen)
+        self.present(navi, animated: true, completion: nil)
+    }
 }
