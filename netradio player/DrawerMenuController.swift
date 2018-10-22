@@ -62,7 +62,7 @@ class DrawerMenuController: UITableViewController {
             if indexPath.row == 0 { // 「今日更新予定の番組一覧」の時
                 
             } else { // 「番組一覧」の時
-                let onsen = OnsenController()
+                let onsen = OnsenListController()
                 let navi = UINavigationController(rootViewController: onsen)
                 self.present(navi, animated: true, completion: nil)
             }

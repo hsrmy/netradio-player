@@ -19,11 +19,18 @@
 		86C3683D21772091008428D6 /* HibikiAllController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3683C21772091008428D6 /* HibikiAllController.swift */; };
 		86C3683F217899CA008428D6 /* HibikiPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3683E217899CA008428D6 /* HibikiPlayerController.swift */; };
 		86C36841217DC18F008428D6 /* HibikiTodayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C36840217DC18F008428D6 /* HibikiTodayController.swift */; };
+		86C36843217DE649008428D6 /* OnsenMonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C36842217DE649008428D6 /* OnsenMonController.swift */; };
+		86C36845217DE929008428D6 /* OnsenTueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C36844217DE929008428D6 /* OnsenTueController.swift */; };
+		86C36847217DE968008428D6 /* OnsenWedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C36846217DE968008428D6 /* OnsenWedController.swift */; };
+		86C36849217DE9BF008428D6 /* OnsenThuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C36848217DE9BF008428D6 /* OnsenThuController.swift */; };
+		86C3684B217DEA3D008428D6 /* OnsenFriController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3684A217DEA3D008428D6 /* OnsenFriController.swift */; };
+		86C3684D217DEA6B008428D6 /* OnsenEndController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3684C217DEA6B008428D6 /* OnsenEndController.swift */; };
+		86C3684F217DEAF1008428D6 /* OnsenAllController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3684E217DEAF1008428D6 /* OnsenAllController.swift */; };
 		86EF0007216553FE00CB76A9 /* netradio_playerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF0006216553FE00CB76A9 /* netradio_playerUITests.swift */; };
 		86EF00152165572D00CB76A9 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 86EF00142165572D00CB76A9 /* Settings.bundle */; };
 		86EF001721655A5600CB76A9 /* AgqrController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF001621655A5600CB76A9 /* AgqrController.swift */; };
 		86EF001B21655A9E00CB76A9 /* empty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86EF001921655A9E00CB76A9 /* empty.cpp */; };
-		86EF001E21655D1300CB76A9 /* OnsenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF001D21655D1300CB76A9 /* OnsenController.swift */; };
+		86EF001E21655D1300CB76A9 /* OnsenListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF001D21655D1300CB76A9 /* OnsenListController.swift */; };
 		86EFFFE7216553FB00CB76A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EFFFE6216553FB00CB76A9 /* AppDelegate.swift */; };
 		86EFFFE9216553FB00CB76A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EFFFE8216553FB00CB76A9 /* ViewController.swift */; };
 		86EFFFEE216553FE00CB76A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86EFFFED216553FE00CB76A9 /* Assets.xcassets */; };
@@ -72,6 +79,13 @@
 		86C3683C21772091008428D6 /* HibikiAllController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HibikiAllController.swift; sourceTree = "<group>"; };
 		86C3683E217899CA008428D6 /* HibikiPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HibikiPlayerController.swift; sourceTree = "<group>"; };
 		86C36840217DC18F008428D6 /* HibikiTodayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HibikiTodayController.swift; sourceTree = "<group>"; };
+		86C36842217DE649008428D6 /* OnsenMonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenMonController.swift; sourceTree = "<group>"; };
+		86C36844217DE929008428D6 /* OnsenTueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenTueController.swift; sourceTree = "<group>"; };
+		86C36846217DE968008428D6 /* OnsenWedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenWedController.swift; sourceTree = "<group>"; };
+		86C36848217DE9BF008428D6 /* OnsenThuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenThuController.swift; sourceTree = "<group>"; };
+		86C3684A217DEA3D008428D6 /* OnsenFriController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenFriController.swift; sourceTree = "<group>"; };
+		86C3684C217DEA6B008428D6 /* OnsenEndController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenEndController.swift; sourceTree = "<group>"; };
+		86C3684E217DEAF1008428D6 /* OnsenAllController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenAllController.swift; sourceTree = "<group>"; };
 		86EF0002216553FE00CB76A9 /* netradio playerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "netradio playerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF0006216553FE00CB76A9 /* netradio_playerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = netradio_playerUITests.swift; sourceTree = "<group>"; };
 		86EF0008216553FE00CB76A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,7 +94,7 @@
 		86EF001821655A9D00CB76A9 /* netradio player-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "netradio player-Bridging-Header.h"; sourceTree = "<group>"; };
 		86EF001921655A9E00CB76A9 /* empty.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = empty.cpp; sourceTree = "<group>"; };
 		86EF001A21655A9E00CB76A9 /* empty.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = empty.hpp; sourceTree = "<group>"; };
-		86EF001D21655D1300CB76A9 /* OnsenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenController.swift; sourceTree = "<group>"; };
+		86EF001D21655D1300CB76A9 /* OnsenListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenListController.swift; sourceTree = "<group>"; };
 		86EFFFE3216553FB00CB76A9 /* netradio player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "netradio player.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EFFFE6216553FB00CB76A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86EFFFE8216553FB00CB76A9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -165,7 +179,14 @@
 				86FAFC6A2174AB2500201153 /* NavigationDrawer.swift */,
 				86FAFC5C2174612F00201153 /* DrawerMenuController.swift */,
 				86EFFFE8216553FB00CB76A9 /* ViewController.swift */,
-				86EF001D21655D1300CB76A9 /* OnsenController.swift */,
+				86EF001D21655D1300CB76A9 /* OnsenListController.swift */,
+				86C3684E217DEAF1008428D6 /* OnsenAllController.swift */,
+				86C3684C217DEA6B008428D6 /* OnsenEndController.swift */,
+				86C3684A217DEA3D008428D6 /* OnsenFriController.swift */,
+				86C36848217DE9BF008428D6 /* OnsenThuController.swift */,
+				86C36846217DE968008428D6 /* OnsenWedController.swift */,
+				86C36844217DE929008428D6 /* OnsenTueController.swift */,
+				86C36842217DE649008428D6 /* OnsenMonController.swift */,
 				86C36840217DC18F008428D6 /* HibikiTodayController.swift */,
 				86C3683E217899CA008428D6 /* HibikiPlayerController.swift */,
 				86FAFC662174940900201153 /* HibikiListController.swift */,
@@ -480,22 +501,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				86FAFC6B2174AB2500201153 /* NavigationDrawer.swift in Sources */,
+				86C36843217DE649008428D6 /* OnsenMonController.swift in Sources */,
 				86C3683D21772091008428D6 /* HibikiAllController.swift in Sources */,
 				86EFFFE9216553FB00CB76A9 /* ViewController.swift in Sources */,
+				86C36845217DE929008428D6 /* OnsenTueController.swift in Sources */,
 				86C36841217DC18F008428D6 /* HibikiTodayController.swift in Sources */,
 				86EF001B21655A9E00CB76A9 /* empty.cpp in Sources */,
 				86C368372175F197008428D6 /* HibikiThuController.swift in Sources */,
 				86FAFC5D2174612F00201153 /* DrawerMenuController.swift in Sources */,
 				86C368352175E9EC008428D6 /* HibikiWedController.swift in Sources */,
 				86C368332175DC6A008428D6 /* HibikiTueController.swift in Sources */,
+				86C36849217DE9BF008428D6 /* OnsenThuController.swift in Sources */,
 				86C368312175D973008428D6 /* HibikiMonController.swift in Sources */,
 				86890BCF2167B916005C76EA /* LanchScreenController.swift in Sources */,
 				86C3683F217899CA008428D6 /* HibikiPlayerController.swift in Sources */,
+				86C3684B217DEA3D008428D6 /* OnsenFriController.swift in Sources */,
 				86C368392175F240008428D6 /* HibikiFriController.swift in Sources */,
+				86C3684F217DEAF1008428D6 /* OnsenAllController.swift in Sources */,
+				86C3684D217DEA6B008428D6 /* OnsenEndController.swift in Sources */,
 				86EF001721655A5600CB76A9 /* AgqrController.swift in Sources */,
 				86FAFC672174940900201153 /* HibikiListController.swift in Sources */,
-				86EF001E21655D1300CB76A9 /* OnsenController.swift in Sources */,
+				86EF001E21655D1300CB76A9 /* OnsenListController.swift in Sources */,
 				86EFFFE7216553FB00CB76A9 /* AppDelegate.swift in Sources */,
+				86C36847217DE968008428D6 /* OnsenWedController.swift in Sources */,
 				86C3683B2175F2DD008428D6 /* HibikiEndController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
