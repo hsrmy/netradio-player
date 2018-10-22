@@ -61,12 +61,12 @@ class LanchScreenController: UIViewController {
                     self.onseninfo = [String:Array<Any>]()
                     for day in self.dow {
                         for i in (0...((self.onsenlist[day]?.count)!-1)) {
-                            let name = self.onsenlist[day]?[i] as! String
-                            let data = self.getOnsenInfo(name)
-                            if self.onseninfo[name] == nil {
-                                self.onseninfo[name] = []
+                            let name = self.onsenlist[day]?[i]
+                            let data = self.getOnsenInfo(name!)
+                            if self.onseninfo[name!] == nil {
+                                self.onseninfo[name!] = []
                             } // L.66
-                            self.onseninfo[name]? = data
+                            self.onseninfo[name!]? = data
                         } // L.63
                     } // L.62
                     DispatchQueue.main.async {
@@ -116,7 +116,6 @@ class LanchScreenController: UIViewController {
                     let navi = UINavigationController(rootViewController: next)
                     self.present(navi, animated: false, completion: nil)
                 }
-                print(self.hibikiInfo)
             } else { // 2回目以降 // L.54
                 var getonsen = false
                 var gethibiki = false
@@ -146,12 +145,12 @@ class LanchScreenController: UIViewController {
                     self.onseninfo = [String:Array<Any>]()
                     for day in self.dow {
                         for i in (0...((self.onsenlist[day]?.count)!-1)) {
-                            let name = self.onsenlist[day]?[i] as! String
-                            let data = self.getOnsenInfo(name)
-                            if self.onseninfo[name] == nil {
-                                self.onseninfo[name] = []
+                            let name = self.onsenlist[day]?[i]
+                            let data = self.getOnsenInfo(name!)
+                            if self.onseninfo[name!] == nil {
+                                self.onseninfo[name!] = []
                             }
-                            self.onseninfo[name]? = data
+                            self.onseninfo[name!]? = data
                         }
                     }
                     DispatchQueue.main.async {
@@ -197,12 +196,12 @@ class LanchScreenController: UIViewController {
                     self.onseninfo = [String:Array<Any>]()
                     for day in self.dow {
                         for i in (0...((self.onsenlist[day]?.count)!-1)) {
-                            let name = self.onsenlist[day]?[i] as! String
-                            let data = self.getOnsenInfo(name)
-                            if self.onseninfo[name] == nil {
-                                self.onseninfo[name] = []
+                            let name = self.onsenlist[day]?[i]
+                            let data = self.getOnsenInfo(name!)
+                            if self.onseninfo[name!] == nil {
+                                self.onseninfo[name!] = []
                             }
-                            self.onseninfo[name]? = data
+                            self.onseninfo[name!]? = data
                         }
                     }
                     DispatchQueue.main.async {
@@ -289,8 +288,8 @@ class LanchScreenController: UIViewController {
         detail.text = "進捗: -"
     }
     
-    func getOnsenList() -> [String:Array<Any>] {
-        var proglist = [String:Array<Any>]()
+    func getOnsenList() -> [String:Array<String>] {
+        var proglist = [String:Array<String>]()
         
         let url = URL(string: "http://www.onsen.ag")!
         do {
@@ -299,7 +298,7 @@ class LanchScreenController: UIViewController {
                 // 取得したhtmlをパースできるようにする
                 let document = try HTMLDocument(string: html, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))
                 // class="listWrap"->class="clr"->li
-                var list = [String:Array<Any>]()
+                var list = [String:Array<String>]()
                 for element in document.css(".listWrap .clr li"){
                     let name:String = element.attr("id")! // 属性idの属性値を代入
                     let week:String = element.attr("data-week")! // 属性data-weekの属性値を代入
