@@ -11,7 +11,7 @@ import Fuzi
 
 class LanchScreenController: UIViewController {
     let dow = ["mon","tue","wed","thu","fri","sat"]
-    var onsenlist: [String:Array<Any>]!
+    var onsenlist: [String:Array<String>]!
     var onseninfo: [String:Array<Any>]!
     var hibikilist: [String:Array<String>]!
     var hibikiInfo: [String:Array<Any>]!
