@@ -12,8 +12,6 @@ import FontAwesome_swift
 
 class OnsenListController: ButtonBarPagerTabStripViewController {
     var navigationDrawer: NavigationDrawer!
-    var list: [String:Array<Any>]!
-    var info: [String:Array<Any>]!
     
     override func viewDidLoad() {
         settings.style.buttonBarBackgroundColor = UIColor.blue
