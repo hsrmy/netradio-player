@@ -48,9 +48,13 @@ class HibikiPlayerController: AVPlayerViewController {
         self.view.addSubview(controller.view)
         self.addChild(controller)
         player?.play()
-
-
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
     // 響のHLSのプレイリスト取得関数
     func getPlaylistUrl(videoid: String) -> String {
         var playlist_url: String!

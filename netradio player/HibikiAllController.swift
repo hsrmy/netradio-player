@@ -108,9 +108,13 @@ class HibikiAllController: UIViewController, IndicatorInfoProvider, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("\(indexPath.section),\(indexPath.row)")
         //        let cell = collectionView.cellForItem(at: indexPath)
-//        let prog = list["6"]?[indexPath.row]
-//        print(prog!)
+        let prog = list[(indexPath.section+1).description]?[indexPath.row]
+        let id = info[prog!]?[3] as! String
+        let thumbnail = info[prog!]?[4] as! Data
+        
+        let hibiki = HibikiPlayerController(id: id,thumbnail: thumbnail)
+        let navi = UINavigationController(rootViewController: hibiki)
+        self.present(navi, animated: true, completion: nil)
     }
 }

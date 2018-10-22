@@ -18,6 +18,7 @@
 		86C3683B2175F2DD008428D6 /* HibikiEndController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3683A2175F2DD008428D6 /* HibikiEndController.swift */; };
 		86C3683D21772091008428D6 /* HibikiAllController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3683C21772091008428D6 /* HibikiAllController.swift */; };
 		86C3683F217899CA008428D6 /* HibikiPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C3683E217899CA008428D6 /* HibikiPlayerController.swift */; };
+		86C36841217DC18F008428D6 /* HibikiTodayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C36840217DC18F008428D6 /* HibikiTodayController.swift */; };
 		86EF0007216553FE00CB76A9 /* netradio_playerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF0006216553FE00CB76A9 /* netradio_playerUITests.swift */; };
 		86EF00152165572D00CB76A9 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 86EF00142165572D00CB76A9 /* Settings.bundle */; };
 		86EF001721655A5600CB76A9 /* AgqrController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF001621655A5600CB76A9 /* AgqrController.swift */; };
@@ -70,6 +71,7 @@
 		86C3683A2175F2DD008428D6 /* HibikiEndController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HibikiEndController.swift; sourceTree = "<group>"; };
 		86C3683C21772091008428D6 /* HibikiAllController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HibikiAllController.swift; sourceTree = "<group>"; };
 		86C3683E217899CA008428D6 /* HibikiPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HibikiPlayerController.swift; sourceTree = "<group>"; };
+		86C36840217DC18F008428D6 /* HibikiTodayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HibikiTodayController.swift; sourceTree = "<group>"; };
 		86EF0002216553FE00CB76A9 /* netradio playerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "netradio playerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EF0006216553FE00CB76A9 /* netradio_playerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = netradio_playerUITests.swift; sourceTree = "<group>"; };
 		86EF0008216553FE00CB76A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				86FAFC5C2174612F00201153 /* DrawerMenuController.swift */,
 				86EFFFE8216553FB00CB76A9 /* ViewController.swift */,
 				86EF001D21655D1300CB76A9 /* OnsenController.swift */,
+				86C36840217DC18F008428D6 /* HibikiTodayController.swift */,
 				86C3683E217899CA008428D6 /* HibikiPlayerController.swift */,
 				86FAFC662174940900201153 /* HibikiListController.swift */,
 				86C3683C21772091008428D6 /* HibikiAllController.swift */,
@@ -479,6 +482,7 @@
 				86FAFC6B2174AB2500201153 /* NavigationDrawer.swift in Sources */,
 				86C3683D21772091008428D6 /* HibikiAllController.swift in Sources */,
 				86EFFFE9216553FB00CB76A9 /* ViewController.swift in Sources */,
+				86C36841217DC18F008428D6 /* HibikiTodayController.swift in Sources */,
 				86EF001B21655A9E00CB76A9 /* empty.cpp in Sources */,
 				86C368372175F197008428D6 /* HibikiThuController.swift in Sources */,
 				86FAFC5D2174612F00201153 /* DrawerMenuController.swift in Sources */,

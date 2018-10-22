@@ -90,6 +90,11 @@ class HibikiWedController: UIViewController, IndicatorInfoProvider, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //        let cell = collectionView.cellForItem(at: indexPath)
         let prog = list["3"]?[indexPath.row]
-        print(prog!)
+        let id = info[prog!]?[3] as! String
+        let thumbnail = info[prog!]?[4] as! Data
+        
+        let hibiki = HibikiPlayerController(id: id,thumbnail: thumbnail)
+        let navi = UINavigationController(rootViewController: hibiki)
+        self.present(navi, animated: true, completion: nil)
     }
 }

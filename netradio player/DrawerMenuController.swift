@@ -10,7 +10,7 @@ import UIKit
 
 class DrawerMenuController: UITableViewController {
     let sections = ["超!A&G+", "音泉", "響", " "]
-    let rows = [["現在再生中の番組","番組表"],["今日更新予定の番組一覧","番組一覧"],["今日更新予定の番組一覧","番組一覧"],["設定"]]
+    let rows = [["今すぐ超!A&G+を聞く","番組表"],["今日更新予定の番組一覧","番組一覧"],["今日更新予定の番組一覧","番組一覧"],["設定"]]
 
     
     override func viewDidLoad() {
@@ -50,6 +50,35 @@ class DrawerMenuController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0 { // A&G
+            if indexPath.row == 0 { // 「今すぐ超!A&G+を聞く」の時
+                let agqr = AgqrController()
+                let navi = UINavigationController(rootViewController: agqr)
+                self.present(navi, animated: true, completion: nil)
+            } else { // A&Gの番組表のとき
+                
+            }
+        } else if indexPath.section == 1 { // 音選
+            if indexPath.row == 0 { // 「今日更新予定の番組一覧」の時
+                
+            } else { // 「番組一覧」の時
+                let onsen = OnsenController()
+                let navi = UINavigationController(rootViewController: onsen)
+                self.present(navi, animated: true, completion: nil)
+            }
+        } else if indexPath.section == 2 { // 響
+            if indexPath.row == 0 { // 「今日更新予定の番組一覧」の時
+                let hibiki = HibikiTodayController()
+                let navi = UINavigationController(rootViewController: hibiki)
+                self.present(navi, animated: true, completion: nil)
+            } else {
+                let hibiki = HibikiListController()
+                let navi = UINavigationController(rootViewController: hibiki)
+                self.present(navi, animated: true, completion: nil)
+            }
+        } else { // 設定
+            
+        }
     }
     
 }
