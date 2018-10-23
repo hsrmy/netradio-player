@@ -23,6 +23,12 @@ class OnsenTodayController: UIViewController, UICollectionViewDataSource, UIColl
         self.view.backgroundColor = UIColor.white
         navigationController?.navigationBar.isTranslucent = false
         
+        let back_button = UIBarButtonItem()
+        back_button.image = UIImage.fontAwesomeIcon(name: .chevronLeft, style: .solid, textColor: .blue, size: CGSize(width: 26, height: 26))
+        back_button.target = self
+        back_button.action = #selector(self.goback)
+        self.navigationItem.leftBarButtonItem = back_button
+        
         let layout = UICollectionViewFlowLayout()
         if UIDevice.current.userInterfaceIdiom == .pad { // iPadの場合
             let size: CGFloat = (UIScreen.main.bounds.width - (25*3))/3
@@ -72,7 +78,6 @@ class OnsenTodayController: UIViewController, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let cal: NSCalendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!
         let comp: NSDateComponents = cal.components([NSCalendar.Unit.weekday], from: NSDate() as Date) as NSDateComponents
-        print(comp.weekday)
         if comp.weekday == 1 {
             today_dow = 0
         } else {
@@ -113,5 +118,9 @@ class OnsenTodayController: UIViewController, UICollectionViewDataSource, UIColl
         let onsen = OnsenPlayerController(name: title, url: url, thumbnail: thumbnail)
         let navi = UINavigationController(rootViewController: onsen)
         self.present(navi, animated: true, completion: nil)
+    }
+    
+    @objc func goback() {
+        self.dismiss(animated: true, completion: nil)
     }
 }

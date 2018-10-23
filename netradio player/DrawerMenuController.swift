@@ -54,6 +54,7 @@ class DrawerMenuController: UITableViewController {
             if indexPath.row == 0 { // 「今すぐ超!A&G+を聞く」の時
                 let agqr = AgqrController()
                 let navi = UINavigationController(rootViewController: agqr)
+                NavigationDrawer.sharedInstance.toggleNavigationDrawer(completionHandler: nil)
                 self.present(navi, animated: true, completion: nil)
             } else { // A&Gの番組表のとき
                 
@@ -62,20 +63,24 @@ class DrawerMenuController: UITableViewController {
             if indexPath.row == 0 { // 「今日更新予定の番組一覧」の時
                 let onsen = OnsenTodayController()
                 let navi = UINavigationController(rootViewController: onsen)
+                NavigationDrawer.sharedInstance.toggleNavigationDrawer(completionHandler: nil)
                 self.present(navi, animated: true, completion: nil)
             } else { // 「番組一覧」の時
                 let onsen = OnsenListController()
                 let navi = UINavigationController(rootViewController: onsen)
+                NavigationDrawer.sharedInstance.toggleNavigationDrawer(completionHandler: nil)
                 self.present(navi, animated: true, completion: nil)
             }
         } else if indexPath.section == 2 { // 響
             if indexPath.row == 0 { // 「今日更新予定の番組一覧」の時
                 let hibiki = HibikiTodayController()
                 let navi = UINavigationController(rootViewController: hibiki)
+                NavigationDrawer.sharedInstance.toggleNavigationDrawer(completionHandler: nil)
                 self.present(navi, animated: true, completion: nil)
             } else {
                 let hibiki = HibikiListController()
                 let navi = UINavigationController(rootViewController: hibiki)
+                NavigationDrawer.sharedInstance.toggleNavigationDrawer(completionHandler: nil)
                 self.present(navi, animated: true, completion: nil)
             }
         } else { // 設定

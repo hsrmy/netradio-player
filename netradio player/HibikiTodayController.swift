@@ -22,6 +22,12 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
         self.view.backgroundColor = UIColor.white
         navigationController?.navigationBar.isTranslucent = false
         
+        let back_button = UIBarButtonItem()
+        back_button.image = UIImage.fontAwesomeIcon(name: .chevronLeft, style: .solid, textColor: .blue, size: CGSize(width: 26, height: 26))
+        back_button.target = self
+        back_button.action = #selector(self.goback)
+        self.navigationItem.leftBarButtonItem = back_button
+        
         let layout = UICollectionViewFlowLayout()
         if UIDevice.current.userInterfaceIdiom == .pad { // iPadの場合
             let size: CGFloat = (UIScreen.main.bounds.width - (25*3))/3
@@ -110,5 +116,9 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
         let hibiki = HibikiPlayerController(id: id,thumbnail: thumbnail)
         let navi = UINavigationController(rootViewController: hibiki)
         self.present(navi, animated: true, completion: nil)
+    }
+    
+    @objc func goback() {
+        self.dismiss(animated: true, completion: nil)
     }
 }
