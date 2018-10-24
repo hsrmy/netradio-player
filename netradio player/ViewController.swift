@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FontAwesome_swift
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     var stationTable: UITableView! // 放送局一覧のテーブル
@@ -125,7 +126,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         stationTable.frame = CGRect(x: 0, y: uisize, width: self.view.bounds.width, height: framesize)
         stationTable.rowHeight = framesize/3 // セルの高さをフレームの高さの3分の1に
         
+        let setting = UIBarButtonItem()
+        setting.image = UIImage.fontAwesomeIcon(name: .cog, style: .solid, textColor: .blue, size: CGSize(width: 26, height: 26))
+        setting.target = self
+        setting.action = #selector(self.goSetting)
+        self.navigationItem.rightBarButtonItem = setting
+        
         self.view.addSubview(stationTable) // テーブルのセット
+    }
+
+    @objc func goSetting() {
+        let setting = SettingViewController()
+        let navi = UINavigationController(rootViewController: setting)
+        self.present(navi, animated: true, completion: nil)
     }
 }
 

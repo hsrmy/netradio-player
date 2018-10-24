@@ -59,7 +59,7 @@ class DrawerMenuController: UITableViewController {
             } else { // A&Gの番組表のとき
                 
             }
-        } else if indexPath.section == 1 { // 音選
+        } else if indexPath.section == 1 { // 音泉
             if indexPath.row == 0 { // 「今日更新予定の番組一覧」の時
                 let onsen = OnsenTodayController()
                 let navi = UINavigationController(rootViewController: onsen)
@@ -69,6 +69,9 @@ class DrawerMenuController: UITableViewController {
                 let onsen = OnsenListController()
                 let navi = UINavigationController(rootViewController: onsen)
                 NavigationDrawer.sharedInstance.toggleNavigationDrawer(completionHandler: nil)
+                DispatchQueue.main.async {
+                    self.view.makeToast("\"インターネットラジオステーション＜音泉＞\"を選局します\nしばらくお待ち下さい", duration: 3)
+                }
                 self.present(navi, animated: true, completion: nil)
             }
         } else if indexPath.section == 2 { // 響
@@ -81,10 +84,16 @@ class DrawerMenuController: UITableViewController {
                 let hibiki = HibikiListController()
                 let navi = UINavigationController(rootViewController: hibiki)
                 NavigationDrawer.sharedInstance.toggleNavigationDrawer(completionHandler: nil)
+                DispatchQueue.main.async {
+                    self.view.makeToast("\"響 - HiBiKi Radio Station\"を選局します\nしばらくお待ち下さい", duration: 3)
+                }
                 self.present(navi, animated: true, completion: nil)
             }
         } else { // 設定
-            
+            let setting = SettingViewController()
+            let navi = UINavigationController(rootViewController: setting)
+            NavigationDrawer.sharedInstance.toggleNavigationDrawer(completionHandler: nil)
+            self.present(navi, animated: true, completion: nil)
         }
     }
     

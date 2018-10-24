@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Toast_Swift
 
 class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     let list = UserDefaults.standard.object(forKey: "hibikilist") as! [String:Array<String>]
@@ -109,13 +110,18 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //        let cell = collectionView.cellForItem(at: indexPath)
-        let prog = list[(indexPath.section+1).description]?[indexPath.row]
+        let prog = list[today_dow]?[indexPath.row]
         let id = info[prog!]?[3] as! String
         let thumbnail = info[prog!]?[4] as! Data
-        
-        let hibiki = HibikiPlayerController(id: id,thumbnail: thumbnail)
-        let navi = UINavigationController(rootViewController: hibiki)
-        self.present(navi, animated: true, completion: nil)
+        if id != "" {
+            let hibiki = HibikiPlayerController(id: id,thumbnail: thumbnail)
+            let navi = UINavigationController(rootViewController: hibiki)
+            self.present(navi, animated: true, completion: nil)
+        } else {
+            DispatchQueue.main.async {
+                self.view.makeToast("FRESH LIVE 響チャンネル(https://freshlive.tv)で視聴できます")
+            }
+        }
     }
     
     @objc func goback() {
