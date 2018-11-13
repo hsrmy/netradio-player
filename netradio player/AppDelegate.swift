@@ -12,9 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var onsenList:[String:Array<Any>] = [String:Array<Any>]()
-    var onsenInfo:[String:Array<Any>] = [String:Array<Any>]()
-
+    var agqrinfo: [String:[[String]]]!
+    var onseninfo: [String:[[String]]]!
+    var hibikiInfo: [String:[[String]]]!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
