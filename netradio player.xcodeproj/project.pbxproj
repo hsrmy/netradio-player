@@ -195,9 +195,9 @@
 				86C36846217DE968008428D6 /* OnsenWedController.swift */,
 				86C36844217DE929008428D6 /* OnsenTueController.swift */,
 				86C36842217DE649008428D6 /* OnsenMonController.swift */,
+				86C36854217ED3AE008428D6 /* SettingViewController.swift */,
 				86C36840217DC18F008428D6 /* HibikiTodayController.swift */,
 				86C3683E217899CA008428D6 /* HibikiPlayerController.swift */,
-				86C36854217ED3AE008428D6 /* SettingViewController.swift */,
 				86FAFC662174940900201153 /* HibikiListController.swift */,
 				86C3683C21772091008428D6 /* HibikiAllController.swift */,
 				86C3683A2175F2DD008428D6 /* HibikiEndController.swift */,
@@ -456,7 +456,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#APP_BRANCH=$(git branch|head -n 1|awk '{print $2}')\n#/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:1:DefaultValue git:${APP_BRANCH}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Settings.bundle/Root.plist\"\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:6:DefaultValue 1.0.0\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Settings.bundle/Root.plist\"\n\nCOMMIT=$(git log --oneline|head -n 1|awk '{print $1}')\nBUILD=$(($(git log --oneline|wc -l)-1))\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:7:DefaultValue ${BUILD}(${COMMIT})\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Settings.bundle/Root.plist\"\n\n";
+			shellScript = "#APP_BRANCH=$(git branch|head -n 1|awk '{print $2}')\n#/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:1:DefaultValue git:${APP_BRANCH}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Settings.bundle/Root.plist\"\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:4:DefaultValue 1.0.0\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Settings.bundle/Root.plist\"\n\nCOMMIT=$(git log --oneline|head -n 1|awk '{print $1}')\nBUILD=$(($(git log --oneline|wc -l)-1))\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:5:DefaultValue ${BUILD}(${COMMIT})\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Settings.bundle/Root.plist\"\n\n";
 		};
 		8B365BAA606677F08CF43747 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

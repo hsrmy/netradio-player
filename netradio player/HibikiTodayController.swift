@@ -10,10 +10,10 @@ import UIKit
 import Toast_Swift
 
 class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-    let list = UserDefaults.standard.object(forKey: "hibikilist") as! [String:Array<String>]
-    let rawinfo = UserDefaults.standard.object(forKey: "hibikiInfo") as! [String:Array<Any>]
-    var info: [String:Array<Any>]!
-    var today_dow: String!
+    var today_dow: Int!
+    var delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    let defaults = UserDefaults.standard
+    let dow = ["mon","tue","wed","thu","fri","sat"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,16 +58,6 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
         
         self.view.addSubview(collectionView)
         self.view.addSubview(toolbar)
-        
-        self.info = [String:Array<Any>]()
-        for (key,value) in rawinfo {
-            if value.count > 0 {
-                if info[key] == nil {
-                    info[key] = []
-                }
-                info[key] = [value[0] as! String, value[1] as! String, value[2] as! String, value[3] as! String, value[4] as! Data]
-            }
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -79,11 +69,12 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
         let cal: NSCalendar = NSCalendar(identifier: NSCalendar.Identifier.gregorian)!
         let comp: NSDateComponents = cal.components([NSCalendar.Unit.weekday], from: NSDate() as Date) as NSDateComponents
         if comp.weekday == 1 {
-            today_dow = "0"
+            today_dow = 0
         } else {
-            today_dow = (comp.weekday-1).description
+            today_dow = comp.weekday-2
         }
-        return list[today_dow]?.count ?? 0
+        
+        return (delegate.hibikiInfo[dow[today_dow]]?.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -92,16 +83,17 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
         cell.contentView.layer.borderColor = UIColor.black.cgColor
         cell.contentView.layer.borderWidth = 1.0
         
-        let prog = list[today_dow]?[indexPath.row]
+        let prog = delegate.hibikiInfo[dow[today_dow]]![indexPath.row]
         
-        let thumbnail = UIImage(data: info[prog!]?[4] as! Data)
+        let picarray = defaults.dictionary(forKey: "picarray")
+        let thumbnail = UIImage(data: picarray!["hibiki-\(prog[0])"] as! Data)
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: cell.contentView.frame.width, height: cell.contentView.frame.height/2))
         imageView.image = thumbnail
         cell.contentView.addSubview(imageView)
         
         let label = UILabel(frame: CGRect(x: 0, y: cell.contentView.frame.height/2, width: cell.contentView.frame.width, height: cell.contentView.frame.height/2))
         label.textAlignment = .center
-        label.text = "\(info[prog!]?[0] as! String)\n\n\(info[prog!]?[1] as! String)"
+        label.text = "\(prog[1])\n\n\(prog[2])"
         label.numberOfLines = 0
         cell.contentView.addSubview(label)
         
@@ -110,18 +102,13 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //        let cell = collectionView.cellForItem(at: indexPath)
-        let prog = list[today_dow]?[indexPath.row]
-        let id = info[prog!]?[3] as! String
-        let thumbnail = info[prog!]?[4] as! Data
-        if id != "" {
-            let hibiki = HibikiPlayerController(id: id,thumbnail: thumbnail)
-            let navi = UINavigationController(rootViewController: hibiki)
-            self.present(navi, animated: true, completion: nil)
-        } else {
-            DispatchQueue.main.async {
-                self.view.makeToast("FRESH LIVE 響チャンネル(https://freshlive.tv)で視聴できます")
-            }
-        }
+        let prog = delegate.hibikiInfo[dow[today_dow]]![indexPath.row]
+        let picarray = defaults.dictionary(forKey: "picarray")
+        let thumbnail = picarray!["hibiki-\(prog[0])"] as! Data
+        
+        let hibiki = HibikiPlayerController(id: prog[4],thumbnail: thumbnail)
+        let navi = UINavigationController(rootViewController: hibiki)
+        self.present(navi, animated: true, completion: nil)
     }
     
     @objc func goback() {
