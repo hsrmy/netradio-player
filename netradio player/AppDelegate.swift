@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var agqrinfo: [String:[[String]]]!
     var onseninfo: [String:[[String]]]!
     var hibikiInfo: [String:[[String]]]!
+    let picarray = UserDefaults.standard.dictionary(forKey: "picarray")
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

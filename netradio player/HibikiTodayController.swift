@@ -12,7 +12,6 @@ import Toast_Swift
 class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     var today_dow: Int!
     var delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    let defaults = UserDefaults.standard
     let dow = ["mon","tue","wed","thu","fri","sat"]
     
     override func viewDidLoad() {
@@ -85,8 +84,7 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
         
         let prog = delegate.hibikiInfo[dow[today_dow]]![indexPath.row]
         
-        let picarray = defaults.dictionary(forKey: "picarray")
-        let thumbnail = UIImage(data: picarray!["hibiki-\(prog[0])"] as! Data)
+        let thumbnail = UIImage(data: delegate.picarray!["hibiki-\(prog[0])"] as! Data)
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: cell.contentView.frame.width, height: cell.contentView.frame.height/2))
         imageView.image = thumbnail
         cell.contentView.addSubview(imageView)
@@ -103,8 +101,7 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //        let cell = collectionView.cellForItem(at: indexPath)
         let prog = delegate.hibikiInfo[dow[today_dow]]![indexPath.row]
-        let picarray = defaults.dictionary(forKey: "picarray")
-        let thumbnail = picarray!["hibiki-\(prog[0])"] as! Data
+        let thumbnail = delegate.picarray!["hibiki-\(prog[0])"] as! Data
         
         let hibiki = HibikiPlayerController(id: prog[4],thumbnail: thumbnail)
         let navi = UINavigationController(rootViewController: hibiki)

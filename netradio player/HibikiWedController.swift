@@ -11,7 +11,6 @@ import XLPagerTabStrip
 
 class HibikiWedController: UIViewController, IndicatorInfoProvider, UICollectionViewDataSource, UICollectionViewDelegate {
     var delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    let defaults = UserDefaults.standard
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,8 +61,7 @@ class HibikiWedController: UIViewController, IndicatorInfoProvider, UICollection
         
         let prog = delegate.hibikiInfo["wed"]![indexPath.row]
         
-        let picarray = defaults.dictionary(forKey: "picarray")
-        let thumbnail = UIImage(data: picarray!["hibiki-\(prog[0])"] as! Data)
+        let thumbnail = UIImage(data: delegate.picarray!["hibiki-\(prog[0])"] as! Data)
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: cell.contentView.frame.width, height: cell.contentView.frame.height/2))
         imageView.image = thumbnail
         cell.contentView.addSubview(imageView)
@@ -79,9 +77,8 @@ class HibikiWedController: UIViewController, IndicatorInfoProvider, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //        let cell = collectionView.cellForItem(at: indexPath)
-        let prog =  delegate.hibikiInfo["wed"]![indexPath.row]
-        let picarray = defaults.dictionary(forKey: "picarray")
-        let thumbnail = picarray!["hibiki-\(prog[0])"] as! Data
+        let prog = delegate.hibikiInfo["wed"]![indexPath.row]
+        let thumbnail = delegate.picarray!["hibiki-\(prog[0])"] as! Data
         
         let hibiki = HibikiPlayerController(id: prog[4],thumbnail: thumbnail)
         let navi = UINavigationController(rootViewController: hibiki)
