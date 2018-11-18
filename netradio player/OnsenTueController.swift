@@ -10,9 +10,7 @@ import UIKit
 import XLPagerTabStrip
 
 class OnsenTueController: UIViewController, IndicatorInfoProvider, UICollectionViewDataSource, UICollectionViewDelegate {
-    let list = UserDefaults.standard.object(forKey: "onsenlist") as! [String:Array<String>]
-    let rawinfo = UserDefaults.standard.object(forKey: "onseninfo") as! [String:Array<Any>]
-    var info: [String:Array<Any>]!
+    var delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,14 +39,6 @@ class OnsenTueController: UIViewController, IndicatorInfoProvider, UICollectionV
         collectionView.delegate = self
         
         self.view.addSubview(collectionView)
-        
-        self.info = [String:Array<Any>]()
-        for (key,value) in rawinfo {
-            if info[key] == nil {
-                info[key] = []
-            }
-            info[key] = [value[0] as! String, value[1] as! String, value[2] as! String, value[3] as! Data]
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -61,7 +51,7 @@ class OnsenTueController: UIViewController, IndicatorInfoProvider, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return list["tue"]?.count ?? 0
+        return (delegate.onseninfo["tue"]?.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -70,16 +60,16 @@ class OnsenTueController: UIViewController, IndicatorInfoProvider, UICollectionV
         cell.contentView.layer.borderColor = UIColor.black.cgColor
         cell.contentView.layer.borderWidth = 1.0
         
-        let prog = list["tue"]?[indexPath.row]
+        let prog = delegate.onseninfo["tue"]![indexPath.row]
         
-        let thumbnail = UIImage(data: info[prog!]?[3] as! Data)
+        let thumbnail = UIImage(data: delegate.picarray!["onsen-\(prog[0])"] as! Data)
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: cell.contentView.frame.width, height: cell.contentView.frame.height/2))
         imageView.image = thumbnail
         cell.contentView.addSubview(imageView)
         
         let label = UILabel(frame: CGRect(x: 0, y: cell.contentView.frame.height/2, width: cell.contentView.frame.width, height: cell.contentView.frame.height/2))
         label.textAlignment = .center
-        label.text = "\(info[prog!]?[0] as! String)\n\n\(info[prog!]?[1] as! String)"
+        label.text = "\(prog[1])\n\n\(prog[2])"
         label.numberOfLines = 0
         cell.contentView.addSubview(label)
         
@@ -88,10 +78,10 @@ class OnsenTueController: UIViewController, IndicatorInfoProvider, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //        let cell = collectionView.cellForItem(at: indexPath)
-        let prog = list["mon"]?[indexPath.row]
-        let title = info[prog!]?[0] as! String
-        let url = info[prog!]?[2] as! String
-        let thumbnail = info[prog!]?[3] as! Data
+        let prog =  delegate.onseninfo["tue"]![indexPath.row]
+        let thumbnail = delegate.picarray!["onsen-\(prog[0])"] as! Data
+        let title = prog[1]
+        let url = prog[4]
         
         let onsen = OnsenPlayerController(name: title, url: url, thumbnail: thumbnail)
         let navi = UINavigationController(rootViewController: onsen)
