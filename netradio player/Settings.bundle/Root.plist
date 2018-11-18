@@ -67,32 +67,6 @@
 			<string>Acknowledgements</string>
 		</dict>
 		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>デバックモード</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>音泉取得スキップ</string>
-			<key>Key</key>
-			<string>onsen_skip</string>
-			<key>DefaultValue</key>
-			<false/>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>響取得スキップ</string>
-			<key>Key</key>
-			<string>hibiki_skip</string>
-			<key>DefaultValue</key>
-			<false/>
-		</dict>
-		<dict>
 			<key>Title</key>
 			<string>ABOUT</string>
 			<key>Type</key>

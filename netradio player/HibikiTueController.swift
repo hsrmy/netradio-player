@@ -81,7 +81,7 @@ class HibikiTueController: UIViewController, IndicatorInfoProvider, UICollection
         let prog = delegate.hibikiInfo["tue"]![indexPath.row]
         let thumbnail = delegate.picarray!["hibiki-\(prog[0])"] as! Data
         
-        let hibiki = HibikiPlayerController(id: prog[4],thumbnail: thumbnail)
+        let hibiki = HibikiPlayerController(id: prog[4], name: prog[1], thumbnail: thumbnail)
         let navi = UINavigationController(rootViewController: hibiki)
         self.present(navi, animated: true, completion: nil)
     }
