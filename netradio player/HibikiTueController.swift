@@ -56,7 +56,9 @@ class HibikiTueController: UIViewController, IndicatorInfoProvider, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath as IndexPath)
-        //        cell.backgroundColor = .red
+        for subview in cell.contentView.subviews{
+            subview.removeFromSuperview()
+        }
         cell.contentView.layer.borderColor = UIColor.black.cgColor
         cell.contentView.layer.borderWidth = 1.0
         
