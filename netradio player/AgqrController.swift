@@ -9,8 +9,10 @@
 import UIKit
 import Toast_Swift
 import Fuzi
+import FontAwesome_swift
 
-class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate,URLSessionDelegate,URLSessionDataDelegate,VLCMediaPlayerDelegate  {
+class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate,URLSessionDelegate,URLSessionDataDelegate,VLCMediaPlayerDelegate {
+    var navigationDrawer: NavigationDrawer!
     
     var movieView: UIView!
     var mediaPlayer: VLCMediaPlayer = VLCMediaPlayer()
@@ -38,6 +40,22 @@ class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate
         let top_reload = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.onTapToolbar(sender:)))
         top_reload.tag = 0
         self.navigationItem.rightBarButtonItem = top_reload
+        
+        let drawer_button = UIBarButtonItem()
+        drawer_button.image = UIImage.fontAwesomeIcon(name: .bars, style: .solid, textColor: .blue, size: CGSize(width: 26, height: 26))
+        drawer_button.target = self
+        drawer_button.action = #selector(self.showDrawer)
+        self.navigationItem.leftBarButtonItem = drawer_button
+        
+        let options = NavigationDrawerOptions()
+        options.navigationDrawerType = .LeftDrawer
+        options.navigationDrawerOpenDirection = .AnyWhere
+        options.navigationDrawerYPosition = 64
+        
+        let vc = DrawerMenuController()
+        navigationDrawer = NavigationDrawer.sharedInstance
+        navigationDrawer.setup(withOptions: options)
+        navigationDrawer.setNavigationDrawerController(viewController: vc)
         
         //ツールバーの設定
         toolbar = UIToolbar()
@@ -105,6 +123,7 @@ class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate
     
     override func viewDidAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
+        NavigationDrawer.sharedInstance.initialize(forViewController: self)
     }
     
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
@@ -314,5 +333,9 @@ class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate
         let close = UIAlertAction(title: "閉じる", style: UIAlertAction.Style.cancel, handler: nil)
         alert.addAction(close)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func showDrawer() {
+        NavigationDrawer.sharedInstance.toggleNavigationDrawer(completionHandler: nil)
     }
 }
