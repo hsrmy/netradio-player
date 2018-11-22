@@ -6,9 +6,7 @@ target 'netradio player' do
   use_frameworks!
 
   # Pods for netradio player
-  pod 'MobileVLCKit'
   pod 'Toast-Swift', '~> 4.0.0'
-  pod 'Fuzi'
   pod 'XLPagerTabStrip', :git => 'https://github.com/xmartlabs/XLPagerTabStrip.git', :branch => 'master'
   pod 'ReachabilitySwift'
   pod 'FontAwesome.swift'

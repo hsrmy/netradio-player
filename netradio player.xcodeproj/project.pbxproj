@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		627C4577A9E498DF8D62400E /* Pods_netradio_playerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46685240C9B38DC490AF8AD6 /* Pods_netradio_playerUITests.framework */; };
+		159CA299EFB6187904C1F631 /* Pods_netradio_playerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C3575C323CEF819FA79C83 /* Pods_netradio_playerTests.framework */; };
+		5F59CDD7F940A51DE6E97185 /* Pods_netradio_playerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF6F695A3331EF2C0775EE33 /* Pods_netradio_playerUITests.framework */; };
+		8633688B21A3D74E00958797 /* AgqrTimetableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8633688A21A3D74E00958797 /* AgqrTimetableController.swift */; };
 		86890BCF2167B916005C76EA /* LanchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86890BCE2167B916005C76EA /* LanchScreenController.swift */; };
-		86C3682A2175D3E3008428D6 /* Pods_netradio_player.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86C368292175D3E3008428D6 /* Pods_netradio_player.framework */; };
 		86C368312175D973008428D6 /* HibikiMonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C368302175D973008428D6 /* HibikiMonController.swift */; };
 		86C368332175DC6A008428D6 /* HibikiTueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C368322175DC6A008428D6 /* HibikiTueController.swift */; };
 		86C368352175E9EC008428D6 /* HibikiWedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C368342175E9EC008428D6 /* HibikiWedController.swift */; };
@@ -42,7 +43,7 @@
 		86FAFC5D2174612F00201153 /* DrawerMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FAFC5C2174612F00201153 /* DrawerMenuController.swift */; };
 		86FAFC672174940900201153 /* HibikiListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FAFC662174940900201153 /* HibikiListController.swift */; };
 		86FAFC6B2174AB2500201153 /* NavigationDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FAFC6A2174AB2500201153 /* NavigationDrawer.swift */; };
-		D6E745F56CF3188BF9909AB5 /* Pods_netradio_playerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0E30222B3EC6A1E0A15ECD2 /* Pods_netradio_playerTests.framework */; };
+		DA0098361D46A8C47286F5EF /* Pods_netradio_player.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4DFF67F80B951827339627 /* Pods_netradio_player.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,16 +64,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03012188CC95897DD522D683 /* Pods-netradio playerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio playerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-netradio playerTests/Pods-netradio playerTests.debug.xcconfig"; sourceTree = "<group>"; };
-		08B18202E606253C5A02E724 /* Pods-netradio player.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio player.debug.xcconfig"; path = "Pods/Target Support Files/Pods-netradio player/Pods-netradio player.debug.xcconfig"; sourceTree = "<group>"; };
-		21EF8215A9700E2F250F4AFA /* Pods-netradio playerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio playerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-netradio playerTests/Pods-netradio playerTests.release.xcconfig"; sourceTree = "<group>"; };
-		2F872F5EB1E09F49AD42197A /* Pods-netradio player.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio player.release.xcconfig"; path = "Pods/Target Support Files/Pods-netradio player/Pods-netradio player.release.xcconfig"; sourceTree = "<group>"; };
-		30C02455E60331AD35030499 /* Pods-netradio playerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio playerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-netradio playerUITests/Pods-netradio playerUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		46685240C9B38DC490AF8AD6 /* Pods_netradio_playerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_netradio_playerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A205ACC51C6D528329F8434 /* Pods_netradio_player.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_netradio_player.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BFBAE867221DEE0BA10EE31 /* Pods-netradio playerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio playerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-netradio playerTests/Pods-netradio playerTests.release.xcconfig"; sourceTree = "<group>"; };
+		2F42D1C28AAAC48E638E6A22 /* Pods-netradio player.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio player.debug.xcconfig"; path = "Pods/Target Support Files/Pods-netradio player/Pods-netradio player.debug.xcconfig"; sourceTree = "<group>"; };
+		3A4DFF67F80B951827339627 /* Pods_netradio_player.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_netradio_player.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48BE4E00CB43A8FFC7AC9308 /* Pods-netradio playerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio playerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-netradio playerUITests/Pods-netradio playerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		8633688A21A3D74E00958797 /* AgqrTimetableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgqrTimetableController.swift; sourceTree = "<group>"; };
 		86890BCE2167B916005C76EA /* LanchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanchScreenController.swift; sourceTree = "<group>"; };
 		86C368272175D3AF008428D6 /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = XLPagerTabStrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		86C368292175D3E3008428D6 /* Pods_netradio_player.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_netradio_player.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86C368302175D973008428D6 /* HibikiMonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HibikiMonController.swift; sourceTree = "<group>"; };
 		86C368322175DC6A008428D6 /* HibikiTueController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HibikiTueController.swift; sourceTree = "<group>"; };
 		86C368342175E9EC008428D6 /* HibikiWedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HibikiWedController.swift; sourceTree = "<group>"; };
@@ -113,8 +111,11 @@
 		86FAFC5C2174612F00201153 /* DrawerMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuController.swift; sourceTree = "<group>"; };
 		86FAFC662174940900201153 /* HibikiListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HibikiListController.swift; sourceTree = "<group>"; };
 		86FAFC6A2174AB2500201153 /* NavigationDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavigationDrawer.swift; path = "/Users/hsrmy/git/netradio player/netradio player/NavigationDrawer.swift"; sourceTree = "<absolute>"; };
-		C0E30222B3EC6A1E0A15ECD2 /* Pods_netradio_playerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_netradio_playerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C53415711721B1D7EECA95E2 /* Pods-netradio playerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio playerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-netradio playerUITests/Pods-netradio playerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		9A16E113A8DEAA22D6F525A9 /* Pods-netradio player.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio player.release.xcconfig"; path = "Pods/Target Support Files/Pods-netradio player/Pods-netradio player.release.xcconfig"; sourceTree = "<group>"; };
+		B53661E0D492B564859AA73F /* Pods-netradio playerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio playerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-netradio playerTests/Pods-netradio playerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D40823B20CE0DBF6CE99F8D3 /* Pods-netradio playerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio playerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-netradio playerUITests/Pods-netradio playerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		D5C3575C323CEF819FA79C83 /* Pods_netradio_playerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_netradio_playerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF6F695A3331EF2C0775EE33 /* Pods_netradio_playerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_netradio_playerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86C3682A2175D3E3008428D6 /* Pods_netradio_player.framework in Frameworks */,
+				DA0098361D46A8C47286F5EF /* Pods_netradio_player.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,7 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6E745F56CF3188BF9909AB5 /* Pods_netradio_playerTests.framework in Frameworks */,
+				159CA299EFB6187904C1F631 /* Pods_netradio_playerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,13 +139,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				627C4577A9E498DF8D62400E /* Pods_netradio_playerUITests.framework in Frameworks */,
+				5F59CDD7F940A51DE6E97185 /* Pods_netradio_playerUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		031C36E974284B14A937530B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2F42D1C28AAAC48E638E6A22 /* Pods-netradio player.debug.xcconfig */,
+				9A16E113A8DEAA22D6F525A9 /* Pods-netradio player.release.xcconfig */,
+				B53661E0D492B564859AA73F /* Pods-netradio playerTests.debug.xcconfig */,
+				2BFBAE867221DEE0BA10EE31 /* Pods-netradio playerTests.release.xcconfig */,
+				D40823B20CE0DBF6CE99F8D3 /* Pods-netradio playerUITests.debug.xcconfig */,
+				48BE4E00CB43A8FFC7AC9308 /* Pods-netradio playerUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		86EF0005216553FE00CB76A9 /* netradio playerUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,8 +176,8 @@
 				86EFFFFA216553FE00CB76A9 /* netradio playerTests */,
 				86EF0005216553FE00CB76A9 /* netradio playerUITests */,
 				86EFFFE4216553FB00CB76A9 /* Products */,
-				E6D7C25C7AD618C68797981B /* Pods */,
 				B9086ADEC45C08363D021B26 /* Frameworks */,
+				031C36E974284B14A937530B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -207,6 +221,7 @@
 				86C368322175DC6A008428D6 /* HibikiTueController.swift */,
 				86C368302175D973008428D6 /* HibikiMonController.swift */,
 				86EF001621655A5600CB76A9 /* AgqrController.swift */,
+				8633688A21A3D74E00958797 /* AgqrTimetableController.swift */,
 				86EF00142165572D00CB76A9 /* Settings.bundle */,
 				86EF001921655A9E00CB76A9 /* empty.cpp */,
 				86EF001A21655A9E00CB76A9 /* empty.hpp */,
@@ -229,26 +244,12 @@
 		B9086ADEC45C08363D021B26 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				86C368292175D3E3008428D6 /* Pods_netradio_player.framework */,
 				86C368272175D3AF008428D6 /* XLPagerTabStrip.framework */,
-				7A205ACC51C6D528329F8434 /* Pods_netradio_player.framework */,
-				C0E30222B3EC6A1E0A15ECD2 /* Pods_netradio_playerTests.framework */,
-				46685240C9B38DC490AF8AD6 /* Pods_netradio_playerUITests.framework */,
+				3A4DFF67F80B951827339627 /* Pods_netradio_player.framework */,
+				D5C3575C323CEF819FA79C83 /* Pods_netradio_playerTests.framework */,
+				DF6F695A3331EF2C0775EE33 /* Pods_netradio_playerUITests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E6D7C25C7AD618C68797981B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				08B18202E606253C5A02E724 /* Pods-netradio player.debug.xcconfig */,
-				2F872F5EB1E09F49AD42197A /* Pods-netradio player.release.xcconfig */,
-				03012188CC95897DD522D683 /* Pods-netradio playerTests.debug.xcconfig */,
-				21EF8215A9700E2F250F4AFA /* Pods-netradio playerTests.release.xcconfig */,
-				30C02455E60331AD35030499 /* Pods-netradio playerUITests.debug.xcconfig */,
-				C53415711721B1D7EECA95E2 /* Pods-netradio playerUITests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,7 +259,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 86EF0011216553FE00CB76A9 /* Build configuration list for PBXNativeTarget "netradio playerUITests" */;
 			buildPhases = (
-				3372129BBA7C91ED8E0D2D06 /* [CP] Check Pods Manifest.lock */,
+				30AB3972F04137E2DF4D6296 /* [CP] Check Pods Manifest.lock */,
 				86EFFFFE216553FE00CB76A9 /* Sources */,
 				86EFFFFF216553FE00CB76A9 /* Frameworks */,
 				86EF0000216553FE00CB76A9 /* Resources */,
@@ -277,12 +278,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 86EF000B216553FE00CB76A9 /* Build configuration list for PBXNativeTarget "netradio player" */;
 			buildPhases = (
-				C74CB57F9FB63C5C81EEB46C /* [CP] Check Pods Manifest.lock */,
+				E2CB0982CD38CCC3B60B56E6 /* [CP] Check Pods Manifest.lock */,
 				86EFFFDF216553FB00CB76A9 /* Sources */,
 				86EFFFE0216553FB00CB76A9 /* Frameworks */,
 				86EFFFE1216553FB00CB76A9 /* Resources */,
 				86EF001C21655BAE00CB76A9 /* ShellScript */,
-				5C6A80DFDB87DB3002372996 /* [CP] Embed Pods Frameworks */,
+				AEB99601E897C240D3E764C6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -297,7 +298,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 86EF000E216553FE00CB76A9 /* Build configuration list for PBXNativeTarget "netradio playerTests" */;
 			buildPhases = (
-				8B365BAA606677F08CF43747 /* [CP] Check Pods Manifest.lock */,
+				D83B2C140522D1D215D12FA8 /* [CP] Check Pods Manifest.lock */,
 				86EFFFF3216553FE00CB76A9 /* Sources */,
 				86EFFFF4216553FE00CB76A9 /* Frameworks */,
 				86EFFFF5216553FE00CB76A9 /* Resources */,
@@ -389,7 +390,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3372129BBA7C91ED8E0D2D06 /* [CP] Check Pods Manifest.lock */ = {
+		30AB3972F04137E2DF4D6296 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -411,36 +412,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5C6A80DFDB87DB3002372996 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-netradio player/Pods-netradio player-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FontAwesome.swift/FontAwesome_swift.framework",
-				"${BUILT_PRODUCTS_DIR}/Fuzi/Fuzi.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
-				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesome_swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Fuzi.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-netradio player/Pods-netradio player-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		86EF001C21655BAE00CB76A9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -458,7 +429,35 @@
 			shellPath = /bin/sh;
 			shellScript = "#APP_BRANCH=$(git branch|head -n 1|awk '{print $2}')\n#/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:1:DefaultValue git:${APP_BRANCH}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Settings.bundle/Root.plist\"\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:4:DefaultValue 1.0.0\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Settings.bundle/Root.plist\"\n\nCOMMIT=$(git log --oneline|head -n 1|awk '{print $1}')\nBUILD=$(($(git log --oneline|wc -l)-1))\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:5:DefaultValue ${BUILD}(${COMMIT})\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/Settings.bundle/Root.plist\"\n\n";
 		};
-		8B365BAA606677F08CF43747 /* [CP] Check Pods Manifest.lock */ = {
+		AEB99601E897C240D3E764C6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-netradio player/Pods-netradio player-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FontAwesome.swift/FontAwesome_swift.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FontAwesome_swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-netradio player/Pods-netradio player-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D83B2C140522D1D215D12FA8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -480,7 +479,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C74CB57F9FB63C5C81EEB46C /* [CP] Check Pods Manifest.lock */ = {
+		E2CB0982CD38CCC3B60B56E6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -520,6 +519,7 @@
 				86FAFC5D2174612F00201153 /* DrawerMenuController.swift in Sources */,
 				86C368352175E9EC008428D6 /* HibikiWedController.swift in Sources */,
 				86C368332175DC6A008428D6 /* HibikiTueController.swift in Sources */,
+				8633688B21A3D74E00958797 /* AgqrTimetableController.swift in Sources */,
 				86C36849217DE9BF008428D6 /* OnsenThuController.swift in Sources */,
 				86C368312175D973008428D6 /* HibikiMonController.swift in Sources */,
 				86890BCF2167B916005C76EA /* LanchScreenController.swift in Sources */,
@@ -690,13 +690,15 @@
 		};
 		86EF000C216553FE00CB76A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08B18202E606253C5A02E724 /* Pods-netradio player.debug.xcconfig */;
+			baseConfigurationReference = 2F42D1C28AAAC48E638E6A22 /* Pods-netradio player.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QGD6JF8G9T;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "netradio player/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -712,13 +714,15 @@
 		};
 		86EF000D216553FE00CB76A9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2F872F5EB1E09F49AD42197A /* Pods-netradio player.release.xcconfig */;
+			baseConfigurationReference = 9A16E113A8DEAA22D6F525A9 /* Pods-netradio player.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QGD6JF8G9T;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "netradio player/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -733,7 +737,7 @@
 		};
 		86EF000F216553FE00CB76A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 03012188CC95897DD522D683 /* Pods-netradio playerTests.debug.xcconfig */;
+			baseConfigurationReference = B53661E0D492B564859AA73F /* Pods-netradio playerTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -755,7 +759,7 @@
 		};
 		86EF0010216553FE00CB76A9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21EF8215A9700E2F250F4AFA /* Pods-netradio playerTests.release.xcconfig */;
+			baseConfigurationReference = 2BFBAE867221DEE0BA10EE31 /* Pods-netradio playerTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -777,7 +781,7 @@
 		};
 		86EF0012216553FE00CB76A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 30C02455E60331AD35030499 /* Pods-netradio playerUITests.debug.xcconfig */;
+			baseConfigurationReference = D40823B20CE0DBF6CE99F8D3 /* Pods-netradio playerUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -798,7 +802,7 @@
 		};
 		86EF0013216553FE00CB76A9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C53415711721B1D7EECA95E2 /* Pods-netradio playerUITests.release.xcconfig */;
+			baseConfigurationReference = 48BE4E00CB43A8FFC7AC9308 /* Pods-netradio playerUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

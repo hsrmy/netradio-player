@@ -7,24 +7,22 @@
 //
 
 import UIKit
-import Toast_Swift
-import Fuzi
+import AVKit
+import AVFoundation
+import Reachability
 import FontAwesome_swift
 
-class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate,URLSessionDelegate,URLSessionDataDelegate,VLCMediaPlayerDelegate {
+class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var navigationDrawer: NavigationDrawer!
     
     var movieView: UIView!
-    var mediaPlayer: VLCMediaPlayer = VLCMediaPlayer()
     var infotable: UITableView!
+    let reachability = Reachability()!
+    var player: AVPlayer!
     var toolbar: UIToolbar!
     var Text = ["タイトル","パーソナリティ","番組説明","番組リンク"]
     var datas: [String] = ["","","",""]
     var timer: Timer!
-    var dates: [String] = []
-    
-    var isLock: Bool = false
-    var isgot:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +33,7 @@ class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate
         defaults.synchronize()
         
         self.view.backgroundColor = UIColor.white
+        
         //ナビゲーションバーの設定
         self.title = "超!A&G"
         let top_reload = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.onTapToolbar(sender:)))
@@ -57,12 +56,13 @@ class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate
         navigationDrawer.setup(withOptions: options)
         navigationDrawer.setNavigationDrawerController(viewController: vc)
         
+        
         //ツールバーの設定
         toolbar = UIToolbar()
         let toolbar_y = UIScreen.main.bounds.height - (self.navigationController?.toolbar.frame.size.height)!
         toolbar.frame = CGRect(x: 0, y:
             toolbar_y, width: self.view.bounds.size.width, height: (self.navigationController?.toolbar.frame.size.height)!)
-        toolbar.barStyle = .default
+        //        toolbar.barStyle = .default
         
         //ツールバーの項目
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -81,9 +81,6 @@ class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate
         
         movieView = UIView()
         infotable = UITableView()
-        
-        movieView.backgroundColor = UIColor.white
-        infotable.backgroundColor = UIColor.white
         
         infotable.dataSource = self
         infotable.delegate = self
@@ -109,10 +106,39 @@ class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate
         self.view.addSubview(movieView)
         self.view.addSubview(infotable)
         
-        play()
-        getProgData()
-        if timer == nil {
-            timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.getProgData), userInfo: nil, repeats: true)
+        reachability.whenReachable = { reachability in
+            // プレイヤー部分
+            let url = URL(string: "http://ic-www.uniqueradio.jp/iphone2/3G.m3u8")
+            self.player = AVPlayer(url: url!)
+            let controller = AVPlayerViewController()
+            controller.player = self.player
+            controller.view.frame.size = self.movieView.frame.size
+            self.movieView.addSubview(controller.view)
+            self.addChild(controller)
+            
+            self.getProgData()
+            
+            self.player.play()
+            if self.timer == nil {
+                self.timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.getProgData), userInfo: nil, repeats: true)
+            }
+        }
+        
+        reachability.whenUnreachable = { reachability in
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            alert.title = "ネットワーク接続がありません"
+            alert.message = "ネットワーク接続がありませんため、再生できません"
+            alert.addAction(UIAlertAction(title: "OK",style: .default,handler: {
+                (action:UIAlertAction!) -> Void in self.dismiss(animated: true, completion: nil)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        // 以下5行はネットワーク接続の検知に必要
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
         }
     }
     
@@ -124,50 +150,6 @@ class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate
     override func viewDidAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
         NavigationDrawer.sharedInstance.initialize(forViewController: self)
-    }
-    
-    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
-        let response = dataTask.response as! HTTPURLResponse
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        if response.url == URL(string: "http://www.uniqueradio.jp/aandg") {
-            if (200...299).contains(response.statusCode){
-                let rawdata = (String(data: data, encoding: String.Encoding.utf8) ?? "").components(separatedBy: "\n")
-                self.datas[0] = self.Cast(strings: rawdata[0].components(separatedBy: " ").last!) //タイトル
-                if rawdata[4].components(separatedBy: " ").last! == "" { //パーソナリティ
-                    self.datas[1] = "情報がありません"
-                } else {
-                    self.datas[1] = self.Cast(strings: rawdata[4].components(separatedBy: " ").last!)
-                }
-                self.datas[2] = self.striphtml(text: self.Cast(strings: rawdata[3].components(separatedBy: " ").last!).replacingOccurrences(of: "<br>", with: "\n")) //説明
-                if self.Cast(strings: rawdata[2].components(separatedBy: " ").last!) == "" {
-                    self.datas[3] = "情報がありません"
-                } else {
-                    self.datas[3] = self.Cast(strings: rawdata[2].components(separatedBy: " ").last!)
-                }
-                DispatchQueue.main.async {
-                    self.infotable.reloadData()
-                }
-                print("\(formatter.string(from: NSDate() as Date)) Gettting program data done.")
-            } else {
-                self.view.makeToast("番組情報の取得に失敗しました\nしばらく待っても番組情報が表示されない場合、再読込ボタンを押してもう一度取得してください", duration: 5)
-                print("\(formatter.string(from: NSDate() as Date)) Gettting program data failed.")
-            }
-        } else if response.url == URL(string: "http://www.agqr.jp/timetable/streaming.html"){
-            let rawdata = (String(data: data, encoding: String.Encoding.utf8) ?? "")
-            edithtml(html: rawdata)
-        }
-    }
-    
-    func urlSession(_ session: URLSession,task: URLSessionTask, didCompleteWithError error: Error?){
-        //        let response = task.response as? HTTPURLResponse
-        //        if response?.url == URL(string: "http://www.uniqueradio.jp/aandg") {
-        DispatchQueue.main.async {
-            self.view.makeToast("番組情報の取得に失敗しました\nしばらく待っても番組情報が表示されない場合、再読込ボタンを押してもう一度取得してください", duration: 5)
-        }
-        //        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -220,7 +202,7 @@ class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate
             self.movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
             self.infotable.frame = CGRect(x: 0, y: framesize+uisize-UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
         } else if (orientation.isLandscape) { //横
-            self.movieView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-UINavigationController().toolbar.frame.size.height)
+            self.movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-uisize)
             self.infotable.frame = CGRect(x: UIScreen.main.bounds.size.width/2, y: 0, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-UINavigationController().toolbar.frame.size.height)
         }
         let toolbar_y = self.view.bounds.size.height - (self.navigationController?.toolbar.frame.size.height)!
@@ -239,9 +221,10 @@ class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate
             DispatchQueue.main.async {
                 self.view.makeToast("再読込します", duration: 3)
             }
-            self.mediaPlayer.stop()
-            self.mediaPlayer.play()
+            self.player.pause()
             self.getProgData()
+            sleep(4)
+            self.player.play()
         //終了ボタン
         case 1:
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
@@ -255,42 +238,38 @@ class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate
         //ブックマークボタン
         case 2:
             print()
-        //            getTimeTable()
         case 3:
-            if isLock == false {
-                isLock = true
-            } else {
-                isLock = false
-            }
+            print()
         default:
             print("error")
         }
     }
     
-    func play() {
-        //RTMPプレイヤー
-        let url = URL(string: "rtmp://fms-base1.mitene.ad.jp/agqr/aandg22")
-        let media = VLCMedia(url: url!)
-        mediaPlayer.media = media
-        mediaPlayer.delegate = self
-        mediaPlayer.drawable = movieView
-        mediaPlayer.play()
-    }
-    
     @objc func getProgData() {
-        let progurl = URL(string: "http://www.uniqueradio.jp/aandg")
-        let urlconfig = URLSessionConfiguration.default
-        let session = URLSession(configuration: urlconfig, delegate: self as URLSessionDelegate, delegateQueue: nil)
-        let task = session.dataTask(with: progurl!)
-        task.resume()
-    }
-    
-    func getTimeTable() {
-        let tableurl = URL(string: "http://www.agqr.jp/timetable/streaming.html")
-        let urlconfig = URLSessionConfiguration.default
-        let session = URLSession(configuration: urlconfig, delegate: self as URLSessionDelegate, delegateQueue: nil)
-        let task = session.dataTask(with: tableurl!)
-        task.resume()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        do {
+            let data = try String(contentsOf: URL(string: "http://www.uniqueradio.jp/aandg")!, encoding: .utf8)
+            let rawdata = data.components(separatedBy: "\n")
+            self.datas[0] = self.Cast(strings: rawdata[0].components(separatedBy: " ").last!) //タイトル
+            if rawdata[4].components(separatedBy: " ").last! == "" { //パーソナリティ
+                self.datas[1] = "情報がありません"
+            } else {
+                self.datas[1] = self.Cast(strings: rawdata[4].components(separatedBy: " ").last!)
+            }
+            self.datas[2] = self.striphtml(text: self.Cast(strings: rawdata[3].components(separatedBy: " ").last!).replacingOccurrences(of: "<br>", with: "\n")) //説明
+            if self.Cast(strings: rawdata[2].components(separatedBy: " ").last!) == "" {
+                self.datas[3] = "情報がありません"
+            } else {
+                self.datas[3] = self.Cast(strings: rawdata[2].components(separatedBy: " ").last!)
+            }
+            DispatchQueue.main.async {
+                self.infotable.reloadData()
+            }
+            print("\(formatter.string(from: NSDate() as Date)) Gettting program data done.")
+        } catch  {
+            print(error)
+        }
     }
     
     func Cast(strings:String) -> String {
@@ -308,31 +287,6 @@ class AgqrController: UIViewController,UITableViewDataSource,UITableViewDelegate
         after = text.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
         after = after.trimmingCharacters(in: .whitespacesAndNewlines)
         return after
-    }
-    
-    func edithtml(html:String) {
-        do {
-            if isgot == false {
-                let document = try HTMLDocument(string: html, encoding: String.Encoding(rawValue: String.Encoding.utf8.rawValue))
-                for thead in document.css("thead"){
-                    for td in thead.css("td") {
-                        dates.append(td.stringValue)
-                    }
-                }
-            }
-        } catch {
-            print("error when parser html")
-        }
-        isgot = true
-        let alert = UIAlertController(title:"番組表", message: "", preferredStyle: UIAlertController.Style.alert)
-        for date in dates {
-            let date = UIAlertAction(title: date, style: UIAlertAction.Style.default, handler: {
-                (action: UIAlertAction!) in print(date) })
-            alert.addAction(date)
-        }
-        let close = UIAlertAction(title: "閉じる", style: UIAlertAction.Style.cancel, handler: nil)
-        alert.addAction(close)
-        self.present(alert, animated: true, completion: nil)
     }
     
     @objc func showDrawer() {
