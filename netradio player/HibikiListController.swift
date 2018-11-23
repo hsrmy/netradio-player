@@ -59,12 +59,12 @@ class HibikiListController: ButtonBarPagerTabStripViewController {
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let monVC = HibikiMonController()
-        let tueVC = HibikiTueController()
-        let wedVC = HibikiWedController()
-        let thuVC = HibikiThuController()
-        let friVC = HibikiFriController()
-        let endVC = HibikiEndController()
+        let monVC = HibikiDayController(day: "mon")
+        let tueVC = HibikiDayController(day: "tue")
+        let wedVC = HibikiDayController(day: "wed")
+        let thuVC = HibikiDayController(day: "thu")
+        let friVC = HibikiDayController(day: "fri")
+        let endVC = HibikiDayController(day: "sat")
         let allVC = HibikiAllController()
         
         let childViewControllers:[UIViewController] = [monVC,tueVC,wedVC,thuVC,friVC,endVC,allVC]

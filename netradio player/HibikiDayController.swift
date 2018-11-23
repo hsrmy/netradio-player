@@ -1,21 +1,31 @@
 //
-//  OnsenThuController.swift
+//  OnsenMonController.swift
 //  netradio player
 //
-//  Created by hsrmy on 2018/10/22.
+//  Created by hsrmy on 2018/10/16.
 //  Copyright © 2018 hsrmy. All rights reserved.
 //
 
 import UIKit
 import XLPagerTabStrip
 
-class OnsenThuController: UIViewController, IndicatorInfoProvider, UICollectionViewDataSource, UICollectionViewDelegate {
+class HibikiDayController: UIViewController, IndicatorInfoProvider, UICollectionViewDataSource, UICollectionViewDelegate {
     var delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    var day: String = ""
+    
+    init(day: String) {
+        self.day = day
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+ 
         let layout = UICollectionViewFlowLayout()
         if UIDevice.current.userInterfaceIdiom == .pad { // iPadの場合
             let size: CGFloat = (UIScreen.main.bounds.width - (25*3))/3
@@ -47,11 +57,26 @@ class OnsenThuController: UIViewController, IndicatorInfoProvider, UICollectionV
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "木曜")
+        switch day {
+        case "mon":
+            return IndicatorInfo(title: "月曜")
+        case "tue":
+            return IndicatorInfo(title: "火曜")
+        case "wed":
+            return IndicatorInfo(title: "水曜")
+        case "thu":
+            return IndicatorInfo(title: "木曜")
+        case "fri":
+            return IndicatorInfo(title: "金曜")
+        case "sat":
+            return IndicatorInfo(title: "土曜・日曜")
+        default:
+            return IndicatorInfo(title: "月曜")
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (delegate.onseninfo["tue"]?.count)!
+        return (delegate.hibikiInfo[day]?.count)!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -62,31 +87,29 @@ class OnsenThuController: UIViewController, IndicatorInfoProvider, UICollectionV
         cell.contentView.layer.borderColor = UIColor.black.cgColor
         cell.contentView.layer.borderWidth = 1.0
         
-        let prog = delegate.onseninfo["thu"]![indexPath.row]
-        
-        let thumbnail = UIImage(data: delegate.picarray!["onsen-\(prog[0])"] as! Data)
+        let prog = delegate.hibikiInfo[day]![indexPath.row]
+
+        let thumbnail = UIImage(data: delegate.picarray!["hibiki-\(prog[0])"] as! Data)
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: cell.contentView.frame.width, height: cell.contentView.frame.height/2))
         imageView.image = thumbnail
         cell.contentView.addSubview(imageView)
-        
+
         let label = UILabel(frame: CGRect(x: 0, y: cell.contentView.frame.height/2, width: cell.contentView.frame.width, height: cell.contentView.frame.height/2))
         label.textAlignment = .center
         label.text = "\(prog[1])\n\n\(prog[2])"
         label.numberOfLines = 0
         cell.contentView.addSubview(label)
-        
+//
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //        let cell = collectionView.cellForItem(at: indexPath)
-        let prog =  delegate.onseninfo["thu"]![indexPath.row]
-        let thumbnail = delegate.picarray!["onsen-\(prog[0])"] as! Data
-        let title = prog[1]
-        let url = prog[4]
+//        let cell = collectionView.cellForItem(at: indexPath)
+        let prog =  delegate.hibikiInfo[day]![indexPath.row]
+        let thumbnail = delegate.picarray!["hibiki-\(prog[0])"] as! Data
         
-        let onsen = OnsenPlayerController(name: title, url: url, thumbnail: thumbnail)
-        let navi = UINavigationController(rootViewController: onsen)
+        let hibiki = HibikiPlayerController(id: prog[4], name: prog[1], thumbnail: thumbnail)
+        let navi = UINavigationController(rootViewController: hibiki)
         self.present(navi, animated: true, completion: nil)
     }
 }

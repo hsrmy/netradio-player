@@ -69,12 +69,12 @@ class OnsenListController: ButtonBarPagerTabStripViewController {
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-        let monVC = OnsenMonController()
-        let tueVC = OnsenTueController()
-        let wedVC = OnsenWedController()
-        let thuVC = OnsenThuController()
-        let friVC = OnsenFriController()
-        let endVC = OnsenEndController()
+        let monVC = OnsenDayController(day: "mon")
+        let tueVC = OnsenDayController(day: "tue")
+        let wedVC = OnsenDayController(day: "wed")
+        let thuVC = OnsenDayController(day: "wed")
+        let friVC = OnsenDayController(day: "fri")
+        let endVC = OnsenDayController(day: "sat")
         let allVC = OnsenAllController()
         
         let childViewControllers:[UIViewController] = [monVC,tueVC,wedVC,thuVC,friVC,endVC,allVC]
