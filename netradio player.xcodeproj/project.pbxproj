@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		159CA299EFB6187904C1F631 /* Pods_netradio_playerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D5C3575C323CEF819FA79C83 /* Pods_netradio_playerTests.framework */; };
 		5F59CDD7F940A51DE6E97185 /* Pods_netradio_playerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF6F695A3331EF2C0775EE33 /* Pods_netradio_playerUITests.framework */; };
-		8633688B21A3D74E00958797 /* AgqrTimetableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8633688A21A3D74E00958797 /* AgqrTimetableController.swift */; };
 		86890BCF2167B916005C76EA /* LanchScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86890BCE2167B916005C76EA /* LanchScreenController.swift */; };
 		86C368312175D973008428D6 /* HibikiMonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C368302175D973008428D6 /* HibikiMonController.swift */; };
 		86C368332175DC6A008428D6 /* HibikiTueController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C368322175DC6A008428D6 /* HibikiTueController.swift */; };
@@ -33,7 +32,6 @@
 		86EF0007216553FE00CB76A9 /* netradio_playerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF0006216553FE00CB76A9 /* netradio_playerUITests.swift */; };
 		86EF00152165572D00CB76A9 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 86EF00142165572D00CB76A9 /* Settings.bundle */; };
 		86EF001721655A5600CB76A9 /* AgqrController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF001621655A5600CB76A9 /* AgqrController.swift */; };
-		86EF001B21655A9E00CB76A9 /* empty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86EF001921655A9E00CB76A9 /* empty.cpp */; };
 		86EF001E21655D1300CB76A9 /* OnsenListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EF001D21655D1300CB76A9 /* OnsenListController.swift */; };
 		86EFFFE7216553FB00CB76A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EFFFE6216553FB00CB76A9 /* AppDelegate.swift */; };
 		86EFFFE9216553FB00CB76A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86EFFFE8216553FB00CB76A9 /* ViewController.swift */; };
@@ -68,7 +66,6 @@
 		2F42D1C28AAAC48E638E6A22 /* Pods-netradio player.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio player.debug.xcconfig"; path = "Pods/Target Support Files/Pods-netradio player/Pods-netradio player.debug.xcconfig"; sourceTree = "<group>"; };
 		3A4DFF67F80B951827339627 /* Pods_netradio_player.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_netradio_player.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48BE4E00CB43A8FFC7AC9308 /* Pods-netradio playerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio playerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-netradio playerUITests/Pods-netradio playerUITests.release.xcconfig"; sourceTree = "<group>"; };
-		8633688A21A3D74E00958797 /* AgqrTimetableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgqrTimetableController.swift; sourceTree = "<group>"; };
 		86890BCE2167B916005C76EA /* LanchScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanchScreenController.swift; sourceTree = "<group>"; };
 		86C368272175D3AF008428D6 /* XLPagerTabStrip.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = XLPagerTabStrip.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86C368302175D973008428D6 /* HibikiMonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HibikiMonController.swift; sourceTree = "<group>"; };
@@ -95,9 +92,6 @@
 		86EF0008216553FE00CB76A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86EF00142165572D00CB76A9 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		86EF001621655A5600CB76A9 /* AgqrController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgqrController.swift; sourceTree = "<group>"; };
-		86EF001821655A9D00CB76A9 /* netradio player-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "netradio player-Bridging-Header.h"; sourceTree = "<group>"; };
-		86EF001921655A9E00CB76A9 /* empty.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = empty.cpp; sourceTree = "<group>"; };
-		86EF001A21655A9E00CB76A9 /* empty.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = empty.hpp; sourceTree = "<group>"; };
 		86EF001D21655D1300CB76A9 /* OnsenListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnsenListController.swift; sourceTree = "<group>"; };
 		86EFFFE3216553FB00CB76A9 /* netradio player.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "netradio player.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		86EFFFE6216553FB00CB76A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -221,13 +215,9 @@
 				86C368322175DC6A008428D6 /* HibikiTueController.swift */,
 				86C368302175D973008428D6 /* HibikiMonController.swift */,
 				86EF001621655A5600CB76A9 /* AgqrController.swift */,
-				8633688A21A3D74E00958797 /* AgqrTimetableController.swift */,
 				86EF00142165572D00CB76A9 /* Settings.bundle */,
-				86EF001921655A9E00CB76A9 /* empty.cpp */,
-				86EF001A21655A9E00CB76A9 /* empty.hpp */,
 				86EFFFED216553FE00CB76A9 /* Assets.xcassets */,
 				86EFFFF2216553FE00CB76A9 /* Info.plist */,
-				86EF001821655A9D00CB76A9 /* netradio player-Bridging-Header.h */,
 			);
 			path = "netradio player";
 			sourceTree = "<group>";
@@ -514,12 +504,10 @@
 				86EFFFE9216553FB00CB76A9 /* ViewController.swift in Sources */,
 				86C36845217DE929008428D6 /* OnsenTueController.swift in Sources */,
 				86C36841217DC18F008428D6 /* HibikiTodayController.swift in Sources */,
-				86EF001B21655A9E00CB76A9 /* empty.cpp in Sources */,
 				86C368372175F197008428D6 /* HibikiThuController.swift in Sources */,
 				86FAFC5D2174612F00201153 /* DrawerMenuController.swift in Sources */,
 				86C368352175E9EC008428D6 /* HibikiWedController.swift in Sources */,
 				86C368332175DC6A008428D6 /* HibikiTueController.swift in Sources */,
-				8633688B21A3D74E00958797 /* AgqrTimetableController.swift in Sources */,
 				86C36849217DE9BF008428D6 /* OnsenThuController.swift in Sources */,
 				86C368312175D973008428D6 /* HibikiMonController.swift in Sources */,
 				86890BCF2167B916005C76EA /* LanchScreenController.swift in Sources */,
@@ -705,7 +693,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.emradc.netradio-player";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "netradio player/netradio player-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -729,7 +717,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.emradc.netradio-player";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "netradio player/netradio player-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
