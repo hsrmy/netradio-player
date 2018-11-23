@@ -12,7 +12,7 @@ import AVFoundation
 import Reachability
 import FontAwesome_swift
 
-class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
     var navigationDrawer: NavigationDrawer!
     
     var movieView: UIView!
@@ -20,6 +20,7 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let reachability = Reachability()!
     var player: AVPlayer!
     var toolbar: UIToolbar!
+    var uisize: CGFloat!
     var Text = ["タイトル","パーソナリティ","番組説明","番組リンク"]
     var datas: [String] = ["","","",""]
     var timer: Timer!
@@ -68,7 +69,10 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let exit = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(self.onTapToolbar(sender:)))
         exit.tag = 1
-        let table = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(self.onTapToolbar(sender:)))
+        let table = UIBarButtonItem()
+        table.image = UIImage.fontAwesomeIcon(name: .table, style: .solid, textColor: .blue, size: CGSize(width: 26, height: 26))
+        table.target = self
+        table.action = #selector(self.onTapToolbar(sender:))
         table.tag = 2
         let buttom_reload = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.onTapToolbar(sender:)))
         buttom_reload.tag = 0
@@ -88,7 +92,7 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         infotable.rowHeight = UITableView.automaticDimension
         
         // UI部分(ステータスバー、ナビゲーションバー、ツールバー)のサイズ
-        let uisize: CGFloat = UIApplication.shared.statusBarFrame.height + UINavigationController().navigationBar.frame.size.height + UINavigationController().toolbar.frame.size.height
+        uisize = UIApplication.shared.statusBarFrame.height + UINavigationController().navigationBar.frame.size.height + UINavigationController().toolbar.frame.size.height
         let framesize = (UIScreen.main.bounds.size.height - uisize)/2
         
         let orientation = UIDevice.current.orientation
@@ -235,9 +239,16 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }))
             alert.addAction(UIAlertAction(title: "キャンセル",style: .cancel,handler: nil))
             self.present(alert, animated: true, completion: nil)
-        //ブックマークボタン
+        //番組表ボタン
         case 2:
-            print()
+            let timetable = AgqrTimetableController()
+            timetable.modalPresentationStyle = .popover
+            timetable.preferredContentSize = CGRect(x: 0, y: 0, width: (UIScreen.main.bounds.width/10)*8, height: (UIScreen.main.bounds.height/10)*7.5).size
+            timetable.popoverPresentationController?.sourceView = toolbar
+            timetable.popoverPresentationController?.sourceRect = UIScreen.main.bounds
+            timetable.popoverPresentationController?.permittedArrowDirections = .any
+            timetable.popoverPresentationController?.delegate = self
+            present(timetable, animated: true, completion: nil)
         case 3:
             print()
         default:
@@ -291,5 +302,10 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @objc func showDrawer() {
         NavigationDrawer.sharedInstance.toggleNavigationDrawer(completionHandler: nil)
+    }
+    
+    // iPhoneで表示される場合に必要
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
     }
 }
