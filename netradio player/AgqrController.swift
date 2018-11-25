@@ -21,6 +21,7 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var player: AVPlayer!
     var toolbar: UIToolbar!
     var uisize: CGFloat!
+    let table = UIBarButtonItem()
     var Text = ["タイトル","パーソナリティ","番組説明","番組リンク"]
     var datas: [String] = ["","","",""]
     var timer: Timer!
@@ -69,7 +70,6 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let exit = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(self.onTapToolbar(sender:)))
         exit.tag = 1
-        let table = UIBarButtonItem()
         table.image = UIImage.fontAwesomeIcon(name: .table, style: .solid, textColor: .blue, size: CGSize(width: 26, height: 26))
         table.target = self
         table.action = #selector(self.onTapToolbar(sender:))
@@ -244,7 +244,8 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let timetable = AgqrTimetableController()
             timetable.modalPresentationStyle = .popover
             timetable.preferredContentSize = CGRect(x: 0, y: 0, width: (UIScreen.main.bounds.width/10)*8, height: (UIScreen.main.bounds.height/10)*7.5).size
-            timetable.popoverPresentationController?.sourceView = toolbar
+            timetable.popoverPresentationController?.barButtonItem = table
+//            timetable.popoverPresentationController?.sourceView = toolbar
             timetable.popoverPresentationController?.sourceRect = UIScreen.main.bounds
             timetable.popoverPresentationController?.permittedArrowDirections = .any
             timetable.popoverPresentationController?.delegate = self
