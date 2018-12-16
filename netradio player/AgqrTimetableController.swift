@@ -37,7 +37,7 @@ class AgqrTimetableController: ButtonBarPagerTabStripViewController {
     }
 }
 
-class DayTimetableController: UIViewController, UITableViewDelegate, UITableViewDataSource, IndicatorInfoProvider {
+class DayTimetableController: UIViewController, UITableViewDelegate, UITableViewDataSource, IndicatorInfoProvider,UIGestureRecognizerDelegate {
     var delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     var day: String = ""
     var table: UITableView!
@@ -61,6 +61,10 @@ class DayTimetableController: UIViewController, UITableViewDelegate, UITableView
         table.dataSource = self
         table.delegate = self
         
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(cellLongPressed))
+        longPressRecognizer.delegate = self
+        table.addGestureRecognizer(longPressRecognizer)
+        
         self.view.addSubview(table)
     }
     
@@ -80,20 +84,29 @@ class DayTimetableController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let prog = delegate.agqrinfo[day]![indexPath.row]
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        alert.title = prog[0]
-        alert.message = "パーソナリティ:\(prog[1])\n\(dow[day]!) \(prog[2])〜\(prog[3])"
-        alert.addAction(UIAlertAction(title: "予約リストに追加",style: .default,handler: {
-            (action:UIAlertAction!) -> Void in print()
-        }))
-        alert.addAction(UIAlertAction(title: "OK",style: .cancel,handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: dow[day])
+    }
+    
+    @objc func cellLongPressed(recognizer: UILongPressGestureRecognizer) {
+        // 押された位置でcellのPathを取得
+        let point = recognizer.location(in: table)
+        let indexPath = table.indexPathForRow(at: point)
+        if indexPath == nil {
+            
+        } else if recognizer.state == UIGestureRecognizer.State.began  {
+            let prog = delegate.agqrinfo[day]![(indexPath?.row)!]
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            alert.title = prog[0]
+            alert.message = "パーソナリティ:\(prog[1])\n\(dow[day]!) \(prog[2])〜\(prog[3])"
+            alert.addAction(UIAlertAction(title: "予約リストに追加",style: .default,handler: {
+                (action:UIAlertAction!) -> Void in print()
+            }))
+            alert.addAction(UIAlertAction(title: "OK",style: .cancel,handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
 }

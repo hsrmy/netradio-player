@@ -97,11 +97,11 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let orientation = UIDevice.current.orientation
         if (orientation.isPortrait) { //縦
-            movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
-            infotable.frame = CGRect(x: 0, y: framesize+uisize-UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
+            self.movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
+            self.infotable.frame = CGRect(x: 0, y: framesize+uisize-UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
         } else if (orientation.isLandscape) { //横
-            movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-uisize)
-            infotable.frame = CGRect(x: UIScreen.main.bounds.size.width/2, y: uisize-UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-uisize)
+            self.movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-uisize)
+            self.infotable.frame = CGRect(x: UIScreen.main.bounds.size.width/2, y: uisize-UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-uisize)
         }
         
         let footer = UIView(frame: CGRect.zero)
@@ -245,7 +245,6 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
             timetable.modalPresentationStyle = .popover
             timetable.preferredContentSize = CGRect(x: 0, y: 0, width: (UIScreen.main.bounds.width/10)*8, height: (UIScreen.main.bounds.height/10)*7.5).size
             timetable.popoverPresentationController?.barButtonItem = table
-//            timetable.popoverPresentationController?.sourceView = toolbar
             timetable.popoverPresentationController?.sourceRect = UIScreen.main.bounds
             timetable.popoverPresentationController?.permittedArrowDirections = .any
             timetable.popoverPresentationController?.delegate = self
@@ -278,7 +277,7 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
             DispatchQueue.main.async {
                 self.infotable.reloadData()
             }
-            print("\(formatter.string(from: NSDate() as Date)) Gettting program data done.")
+            print("\(formatter.string(from: NSDate() as Date)) Getting program data done.")
         } catch  {
             print(error)
         }

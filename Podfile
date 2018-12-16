@@ -10,6 +10,7 @@ target 'netradio player' do
   pod 'XLPagerTabStrip', :git => 'https://github.com/xmartlabs/XLPagerTabStrip.git', :branch => 'master'
   pod 'ReachabilitySwift'
   pod 'FontAwesome.swift'
+  pod 'SideMenu'
 
   target 'netradio playerTests' do
     inherit! :search_paths

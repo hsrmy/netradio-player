@@ -72,7 +72,7 @@ class OnsenListController: ButtonBarPagerTabStripViewController {
         let monVC = OnsenDayController(day: "mon")
         let tueVC = OnsenDayController(day: "tue")
         let wedVC = OnsenDayController(day: "wed")
-        let thuVC = OnsenDayController(day: "wed")
+        let thuVC = OnsenDayController(day: "thu")
         let friVC = OnsenDayController(day: "fri")
         let endVC = OnsenDayController(day: "sat")
         let allVC = OnsenAllController()
