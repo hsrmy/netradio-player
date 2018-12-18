@@ -9,9 +9,9 @@
 import UIKit
 import FontAwesome_swift
 import XLPagerTabStrip
+import SideMenu
 
 class HibikiListController: ButtonBarPagerTabStripViewController {
-    var navigationDrawer:NavigationDrawer!
     
     override func viewDidLoad() {
         settings.style.buttonBarBackgroundColor = UIColor.blue
@@ -36,16 +36,6 @@ class HibikiListController: ButtonBarPagerTabStripViewController {
         drawer_button.target = self
         drawer_button.action = #selector(self.showDrawer)
         self.navigationItem.leftBarButtonItem = drawer_button
-        
-        let options = NavigationDrawerOptions()
-        options.navigationDrawerType = .LeftDrawer
-        options.navigationDrawerOpenDirection = .AnyWhere
-        options.navigationDrawerYPosition = 64
-        
-        let vc = DrawerMenuController()
-        navigationDrawer = NavigationDrawer.sharedInstance
-        navigationDrawer.setup(withOptions: options)
-        navigationDrawer.setNavigationDrawerController(viewController: vc)
         
         let toolbar_y = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - UINavigationController().navigationBar.frame.size.height - settings.style.buttonBarHeight!
         let toolbar = UIToolbar(frame: CGRect(x: 0, y:
@@ -79,12 +69,10 @@ class HibikiListController: ButtonBarPagerTabStripViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        NavigationDrawer.sharedInstance.initialize(forViewController: self)
     }
     
     @objc func showDrawer() {
-        NavigationDrawer.sharedInstance.toggleNavigationDrawer(completionHandler: nil)
+        self.present(SideMenuManager.default.menuLeftNavigationController!, animated: true, completion: nil)
     }
 
     @objc func onTapToolbar(sender: UIButton){

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -25,6 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = navbarController
         self.window?.makeKeyAndVisible()
+        
+        let NavigationDrawer = UISideMenuNavigationController(rootViewController: DrawerMenuController())
+        SideMenuManager.default.menuPresentMode = .menuSlideIn
+        SideMenuManager.default.menuWidth = max(round(min((UIScreen.main.bounds.width/2), (UIScreen.main.bounds.height/2))), 240)
+        SideMenuManager.default.menuLeftNavigationController = NavigationDrawer
         
         return true
     }

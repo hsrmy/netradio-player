@@ -11,9 +11,9 @@ import AVKit
 import AVFoundation
 import Reachability
 import FontAwesome_swift
+import SideMenu
 
 class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
-    var navigationDrawer: NavigationDrawer!
     
     var movieView: UIView!
     var infotable: UITableView!
@@ -47,17 +47,6 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         drawer_button.target = self
         drawer_button.action = #selector(self.showDrawer)
         self.navigationItem.leftBarButtonItem = drawer_button
-        
-        let options = NavigationDrawerOptions()
-        options.navigationDrawerType = .LeftDrawer
-        options.navigationDrawerOpenDirection = .AnyWhere
-        options.navigationDrawerYPosition = 64
-        
-        let vc = DrawerMenuController()
-        navigationDrawer = NavigationDrawer.sharedInstance
-        navigationDrawer.setup(withOptions: options)
-        navigationDrawer.setNavigationDrawerController(viewController: vc)
-        
         
         //ツールバーの設定
         toolbar = UIToolbar()
@@ -153,7 +142,6 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidAppear(_ animated: Bool) {
         NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
-        NavigationDrawer.sharedInstance.initialize(forViewController: self)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -301,7 +289,7 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @objc func showDrawer() {
-        NavigationDrawer.sharedInstance.toggleNavigationDrawer(completionHandler: nil)
+        self.present(SideMenuManager.default.menuLeftNavigationController!, animated: true, completion: nil)
     }
     
     // iPhoneで表示される場合に必要

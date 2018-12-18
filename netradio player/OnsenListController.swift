@@ -9,9 +9,9 @@
 import UIKit
 import XLPagerTabStrip
 import FontAwesome_swift
+import SideMenu
 
 class OnsenListController: ButtonBarPagerTabStripViewController {
-    var navigationDrawer: NavigationDrawer!
     
     override func viewDidLoad() {
         settings.style.buttonBarBackgroundColor = UIColor.blue
@@ -27,7 +27,7 @@ class OnsenListController: ButtonBarPagerTabStripViewController {
         self.title = "インターネットラジオステーション＜音泉＞"
         self.view.backgroundColor = UIColor.white
     
-        // XLPagerTabStripをｓナビゲーションバーにめり込ませない
+        // XLPagerTabStripをナビゲーションバーにめり込ませない
         navigationController?.navigationBar.isTranslucent = false
         
         let drawer_button = UIBarButtonItem()
@@ -35,16 +35,6 @@ class OnsenListController: ButtonBarPagerTabStripViewController {
         drawer_button.target = self
         drawer_button.action = #selector(self.showDrawer)
         self.navigationItem.leftBarButtonItem = drawer_button
-        
-        let options = NavigationDrawerOptions()
-        options.navigationDrawerType = .LeftDrawer
-        options.navigationDrawerOpenDirection = .AnyWhere
-        options.navigationDrawerYPosition = 64
-        
-        let vc = DrawerMenuController()
-        navigationDrawer = NavigationDrawer.sharedInstance
-        navigationDrawer.setup(withOptions: options)
-        navigationDrawer.setNavigationDrawerController(viewController: vc)
         
         let toolbar_y = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - UINavigationController().navigationBar.frame.size.height - settings.style.buttonBarHeight!
         let toolbar = UIToolbar(frame: CGRect(x: 0, y:
@@ -65,7 +55,6 @@ class OnsenListController: ButtonBarPagerTabStripViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(true)
 //        NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
-        NavigationDrawer.sharedInstance.initialize(forViewController: self)
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
@@ -83,7 +72,7 @@ class OnsenListController: ButtonBarPagerTabStripViewController {
     }
     
     @objc func showDrawer() {
-        NavigationDrawer.sharedInstance.toggleNavigationDrawer(completionHandler: nil)
+        self.present(SideMenuManager.default.menuLeftNavigationController!, animated: true, completion: nil)
     }
     
     // 向きが変わったらframeをセットしなおして再描画

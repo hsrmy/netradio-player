@@ -111,6 +111,6 @@ class OnsenTodayController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     @objc func goback() {
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
     }
 }
