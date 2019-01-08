@@ -28,7 +28,7 @@ class HibikiListController: ButtonBarPagerTabStripViewController {
         
         self.title = "響 - HiBiKi Radio Station"
         self.view.backgroundColor = UIColor.white
-        // XLPagerTabStripをｓナビゲーションバーにめり込ませない
+        // XLPagerTabStripをナビゲーションバーにめり込ませない
         navigationController?.navigationBar.isTranslucent = false
         
         let drawer_button = UIBarButtonItem()

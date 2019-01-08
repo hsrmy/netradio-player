@@ -55,7 +55,8 @@ class DrawerMenuController: UITableViewController {
                 let agqr = AgqrController()
                 self.navigationController?.pushViewController(agqr, animated: true)
             } else { // A&Gの番組表のとき
-                
+                let timetable = AgqrTimetableController(isFull: true)
+                self.navigationController?.pushViewController(timetable, animated: true)
             }
         } else if indexPath.section == 1 { // 音泉
             if indexPath.row == 0 { // 「今日更新予定の番組一覧」の時

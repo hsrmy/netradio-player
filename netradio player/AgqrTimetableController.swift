@@ -8,8 +8,19 @@
 
 import UIKit
 import XLPagerTabStrip
+import FontAwesome_swift
 
 class AgqrTimetableController: ButtonBarPagerTabStripViewController {
+    var full: Bool!
+    
+    init(isFull: Bool = false ) {
+        self.full = isFull
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         settings.style.buttonBarBackgroundColor = UIColor.blue
@@ -20,20 +31,31 @@ class AgqrTimetableController: ButtonBarPagerTabStripViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        self.title = "超!A&G+ 番組表"
+        
+        let back_button = UIBarButtonItem()
+        back_button.image = UIImage.fontAwesomeIcon(name: .chevronLeft, style: .solid, textColor: .blue, size: CGSize(width: 26, height: 26))
+        back_button.target = self
+        back_button.action = #selector(self.goback)
+        self.navigationItem.leftBarButtonItem = back_button
     }
         
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
-            let monVC = DayTimetableController(day: "mon")
-            let tueVC = DayTimetableController(day: "tue")
-            let wedVC = DayTimetableController(day: "wed")
-            let thuVC = DayTimetableController(day: "thu")
-            let friVC = DayTimetableController(day: "fri")
-            let satVC = DayTimetableController(day: "sat")
-            let sunVC = DayTimetableController(day: "sun")
+            let monVC = DayTimetableController(day: "mon", full: self.full)
+            let tueVC = DayTimetableController(day: "tue", full: self.full)
+            let wedVC = DayTimetableController(day: "wed", full: self.full)
+            let thuVC = DayTimetableController(day: "thu", full: self.full)
+            let friVC = DayTimetableController(day: "fri", full: self.full)
+            let satVC = DayTimetableController(day: "sat", full: self.full)
+            let sunVC = DayTimetableController(day: "sun", full: self.full)
             
             let childViewControllers:[UIViewController] = [monVC,tueVC,wedVC,thuVC,friVC,satVC,sunVC]
             
             return childViewControllers
+    }
+    
+    @objc func goback() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -41,10 +63,12 @@ class DayTimetableController: UIViewController, UITableViewDelegate, UITableView
     var delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     var day: String = ""
     var table: UITableView!
+    var full: Bool!
     let dow = ["mon":"月曜","tue":"火曜","wed":"水曜","thu":"木曜","fri":"金曜","sat":"土曜","sun":"日曜"]
     
-    init(day: String) {
+    init(day: String,full:Bool) {
         self.day = day
+        self.full = full
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -56,8 +80,15 @@ class DayTimetableController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        navigationController?.navigationBar.isTranslucent = false
         table = UITableView()
-        table.frame = CGRect(x: 0, y: 0, width: (UIScreen.main.bounds.width/10)*8, height: (UIScreen.main.bounds.height/10)*7)
+        if self.full == true {
+            let framesize = UIScreen.main.bounds.size.height - UIApplication.shared.statusBarFrame.height - UINavigationController().navigationBar.frame.size.height
+            table.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: framesize)
+        } else {
+            table.frame = CGRect(x: 0, y: 0, width: (UIScreen.main.bounds.width/10)*8, height: (UIScreen.main.bounds.height/10)*7)
+        }
+        
         table.dataSource = self
         table.delegate = self
         
