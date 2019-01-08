@@ -65,7 +65,10 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         table.tag = 2
         let buttom_reload = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.onTapToolbar(sender:)))
         buttom_reload.tag = 0
-        let lock = UIBarButtonItem(barButtonSystemItem: .organize, target: self, action: #selector(self.onTapToolbar(sender:)))
+        let lock = UIBarButtonItem()
+        lock.image = UIImage.fontAwesomeIcon(name: .unlockAlt, style: .solid, textColor: .blue, size: CGSize(width: 26, height: 26))
+        lock.target = self
+        lock.action = #selector(self.onTapToolbar(sender:))
         lock.tag = 3
         
         toolbar.items = [exit,spacer,table,spacer,buttom_reload,spacer,lock]
@@ -222,7 +225,7 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
             alert.title = "確認"
             alert.message = "アプリを終了しますか?"
-            alert.addAction(UIAlertAction(title: "はい",style: .default,handler: {
+            alert.addAction(UIAlertAction(title: "はい",style: .destructive,handler: {
                 (action:UIAlertAction!) -> Void in exit(0)
             }))
             alert.addAction(UIAlertAction(title: "キャンセル",style: .cancel,handler: nil))
