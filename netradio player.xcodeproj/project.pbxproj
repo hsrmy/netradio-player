@@ -31,7 +31,6 @@
 		86F34AE8216E2DDD00AF58C4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 86F34AE7216E2DDD00AF58C4 /* Default-568h@2x.png */; };
 		86FAFC5D2174612F00201153 /* DrawerMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FAFC5C2174612F00201153 /* DrawerMenuController.swift */; };
 		86FAFC672174940900201153 /* HibikiListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FAFC662174940900201153 /* HibikiListController.swift */; };
-		86FAFC6B2174AB2500201153 /* NavigationDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FAFC6A2174AB2500201153 /* NavigationDrawer.swift */; };
 		DA0098361D46A8C47286F5EF /* Pods_netradio_player.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4DFF67F80B951827339627 /* Pods_netradio_player.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,7 +85,6 @@
 		86F34AE7216E2DDD00AF58C4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		86FAFC5C2174612F00201153 /* DrawerMenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawerMenuController.swift; sourceTree = "<group>"; };
 		86FAFC662174940900201153 /* HibikiListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HibikiListController.swift; sourceTree = "<group>"; };
-		86FAFC6A2174AB2500201153 /* NavigationDrawer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NavigationDrawer.swift; path = "/Users/hsrmy/git/netradio player/netradio player/NavigationDrawer.swift"; sourceTree = "<absolute>"; };
 		9A16E113A8DEAA22D6F525A9 /* Pods-netradio player.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio player.release.xcconfig"; path = "Pods/Target Support Files/Pods-netradio player/Pods-netradio player.release.xcconfig"; sourceTree = "<group>"; };
 		B53661E0D492B564859AA73F /* Pods-netradio playerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio playerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-netradio playerTests/Pods-netradio playerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D40823B20CE0DBF6CE99F8D3 /* Pods-netradio playerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-netradio playerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-netradio playerUITests/Pods-netradio playerUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -172,7 +170,6 @@
 			children = (
 				86EFFFE6216553FB00CB76A9 /* AppDelegate.swift */,
 				86890BCE2167B916005C76EA /* LanchScreenController.swift */,
-				86FAFC6A2174AB2500201153 /* NavigationDrawer.swift */,
 				86FAFC5C2174612F00201153 /* DrawerMenuController.swift */,
 				86EFFFE8216553FB00CB76A9 /* ViewController.swift */,
 				86EF001D21655D1300CB76A9 /* OnsenListController.swift */,
@@ -473,7 +470,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86FAFC6B2174AB2500201153 /* NavigationDrawer.swift in Sources */,
 				86C36843217DE649008428D6 /* OnsenDayController.swift in Sources */,
 				86C3683D21772091008428D6 /* HibikiAllController.swift in Sources */,
 				86EFFFE9216553FB00CB76A9 /* ViewController.swift in Sources */,

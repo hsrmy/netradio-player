@@ -9,6 +9,8 @@
 import UIKit
 import XLPagerTabStrip
 import FontAwesome_swift
+import UserNotifications
+import Toast_Swift
 
 class AgqrTimetableController: ButtonBarPagerTabStripViewController {
     var full: Bool!
@@ -134,10 +136,56 @@ class DayTimetableController: UIViewController, UITableViewDelegate, UITableView
             alert.title = prog[0]
             alert.message = "パーソナリティ:\(prog[1])\n\(dow[day]!) \(prog[2])〜\(prog[3])"
             alert.addAction(UIAlertAction(title: "予約リストに追加",style: .default,handler: {
-                (action:UIAlertAction!) -> Void in print()
-            }))
+                (action:UIAlertAction!) -> Void in self.reservation(prog_name: prog[0], dow: self.day, start: prog[2], end: prog[3])}))
             alert.addAction(UIAlertAction(title: "OK",style: .cancel,handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    func reservation(prog_name: String, dow: String, start: String, end: String) {
+        let days = ["sun":1,"mon":2,"tue":3,"wed":4,"thu":5,"fri":6,"sat":7]
+        let dialog = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        dialog.title = "\"\(prog_name)\"を予約します"
+        dialog.addAction(UIAlertAction(title: "次回のみ予約する", style: .default, handler: {(action:UIAlertAction!) -> Void in
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            let time = Date(timeInterval: -60*3, since: formatter.date(from: start)!)
+            let components = Calendar.current.dateComponents(in: TimeZone.current, from: time)
+            var notificationTime = DateComponents()
+            notificationTime.hour = components.hour
+            notificationTime.minute = components.minute
+            notificationTime.weekday = days[dow]
+            let trigger: UNNotificationTrigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
+            let content = UNMutableNotificationContent()
+            content.title = "予約した番組が始まります!!"
+            content.body = "間もなく\"\(prog_name)\"が始まります!!"
+            content.sound = UNNotificationSound.default
+            let request = UNNotificationRequest(identifier: "\(dow)_\(start)-\(end)", content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            DispatchQueue.main.async {
+                self.view.makeToast("予約しました\n予約はアプリを再起動すると有効になります")
+            }
+        }))
+        dialog.addAction(UIAlertAction(title: "毎週予約する", style: .default, handler: {(action:UIAlertAction!) -> Void in
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            let time = Date(timeInterval: -60*3, since: formatter.date(from: start)!)
+            let components = Calendar.current.dateComponents(in: TimeZone.current, from: time)
+            var notificationTime = DateComponents()
+            notificationTime.hour = components.hour
+            notificationTime.minute = components.minute
+            notificationTime.weekday = days[dow]
+            let trigger: UNNotificationTrigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: true)
+            let content = UNMutableNotificationContent()
+            content.title = "予約した番組が始まります!!"
+            content.body = "間もなく\"\(prog_name)\"が始まります"
+            content.sound = UNNotificationSound.default
+            let request = UNNotificationRequest(identifier: "\(dow)_\(start)-\(end)", content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+            DispatchQueue.main.async {
+                self.view.makeToast("予約しました\n予約はアプリを再起動すると有効になります")
+            }
+        }))
+        self.present(dialog, animated: true, completion: nil)
     }
 }
