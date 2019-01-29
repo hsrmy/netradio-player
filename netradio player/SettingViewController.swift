@@ -118,7 +118,12 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @objc func goback() {
-        self.dismiss(animated: true, completion: nil)
+        let controllers: [UIViewController] = (self.navigationController?.viewControllers)!
+        if controllers.count == 1 {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @objc func toggleSwitch(sender: UISwitch)  {
@@ -143,6 +148,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
 class ReservationEditController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var list: Array<Any>!
     let days = ["mon":"月曜日","tue":"火曜日","wed":"水曜日","thu":"木曜日","fri":"金曜日","sat":"土曜日","sun":"日曜日"]
+    var table: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -156,7 +162,7 @@ class ReservationEditController: UIViewController, UITableViewDelegate, UITableV
         back_button.action = #selector(self.goback)
         self.navigationItem.leftBarButtonItem = back_button
         
-        let table = UITableView(frame: self.view.bounds, style: .grouped)
+        table = UITableView(frame: self.view.bounds, style: .grouped)
         table.tableFooterView = UIView(frame: CGRect.zero)
         table.dataSource = self
         table.delegate = self
@@ -165,7 +171,7 @@ class ReservationEditController: UIViewController, UITableViewDelegate, UITableV
         
         UNUserNotificationCenter.current().getPendingNotificationRequests(completionHandler: { (pending: [UNNotificationRequest]) in
             self.list = pending
-         })
+        })
         self.view.addSubview(table)
     }
     
@@ -208,7 +214,7 @@ class ReservationEditController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         if indexPath.section == 0 {
-            if list.count == 0 || list == nil {
+            if list == nil || list.count == 0 {
                 cell.textLabel?.text = "予約がありません"
                 cell.selectionStyle = UITableViewCell.SelectionStyle.none
             } else {
@@ -228,14 +234,73 @@ class ReservationEditController: UIViewController, UITableViewDelegate, UITableV
                 cell.detailTextLabel?.numberOfLines = 0
             }
         } else if indexPath.section == 1 {
-            cell.textLabel?.text = "予約を全消去する"
-            cell.textLabel?.textColor = UIColor.red
+            if list == nil || list.count == 0 {
+                    cell.isHidden = true
+            } else {
+                cell.textLabel?.text = "予約を全消去する"
+                cell.textLabel?.textColor = UIColor.red
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            }
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let center = UNUserNotificationCenter.current()
+        if indexPath.section == 0 {
+            if list == nil || list.count == 0 {
+                // 何もしない
+            } else {
+                let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+                let data = list[indexPath.row] as! UNNotificationRequest
+                let name = data.content.body.replacingOccurrences(of: "間もなく\"", with: "").replacingOccurrences(of: "\"が始まります", with: "")
+                alert.title = name
+                let dow = String(data.identifier.prefix(3))
+                let time = data.identifier.replacingOccurrences(of: "\(dow)_", with: "")
+                let frequency: String
+                if data.trigger?.repeats == true {
+                    frequency = "毎週"
+                } else {
+                    frequency = "1回のみ"
+                }
+                alert.message = "\(days[dow]!) \(time)\n\(frequency)"
+                alert.addAction(UIAlertAction(title: "削除", style: .destructive, handler: {(action: UIAlertAction!) -> Void in
+                    let dialog = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+                    dialog.title = "本当によろしいですか?"
+                    dialog.message = "\"\(name)\"を削除します"
+                    dialog.addAction(UIAlertAction(title: "はい", style: .destructive, handler: {(action: UIAlertAction!) -> Void in
+                        center.removePendingNotificationRequests(withIdentifiers: [data.identifier])
+                        center.getPendingNotificationRequests(completionHandler: { (pending: [UNNotificationRequest]) in
+                            self.list = pending
+                            DispatchQueue.main.async {
+                                self.table.reloadData()
+                            }
+                        })
+                    }))
+                    dialog.addAction(UIAlertAction(title: "キャンセル",style: .cancel,handler: nil))
+                    self.present(dialog, animated: true, completion: nil)
+                }))
+                alert.addAction(UIAlertAction(title: "OK",style: .cancel,handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        } else {
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            alert.title = "予約リストを全削除します"
+            alert.message = "本当によろしいですか?"
+            alert.addAction(UIAlertAction(title: "はい",style: .destructive,handler: {
+                (action:UIAlertAction!) -> Void in
+                center.removeAllPendingNotificationRequests()
+                center.getPendingNotificationRequests(completionHandler: { (pending: [UNNotificationRequest]) in
+                    self.list = pending
+                    DispatchQueue.main.async {
+                        self.table.reloadData()
+                    }
+                })
+            }))
+            alert.addAction(UIAlertAction(title: "キャンセル",style: .cancel,handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     @objc func goback() {
