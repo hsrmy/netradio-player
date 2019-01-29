@@ -11,12 +11,14 @@ import AVKit
 import AVFoundation
 import Reachability
 
-class OnsenPlayerController: AVPlayerViewController {
+class OnsenPlayerController: UIViewController {
     var name: String = ""
     var url: String = ""
     var thumbnail: Data!
     let reachability = Reachability()!
     let defaults = UserDefaults.standard
+    var controller: AVPlayerViewController!
+    var player: AVPlayer?
     
     init(name: String, url: String, thumbnail: Data) {
         self.name = name
@@ -46,12 +48,12 @@ class OnsenPlayerController: AVPlayerViewController {
             thumLayer.position = rect.center
         
             self.player = AVPlayer(url: url!)
-            let controller = AVPlayerViewController()
-            controller.player = self.player
-            controller.view.frame = self.view.frame
-            controller.view.layer.addSublayer(thumLayer)
-            self.view.addSubview(controller.view)
-            self.addChild(controller)
+            self.controller = AVPlayerViewController()
+            self.controller.player = self.player
+            self.controller.view.frame = self.view.frame
+            self.controller.view.layer.addSublayer(thumLayer)
+            self.view.addSubview(self.controller.view)
+            self.addChild(self.controller)
         
             if self.defaults.bool(forKey: "force_wifi") == true {
                 if reachability.connection == .wifi {
@@ -62,7 +64,7 @@ class OnsenPlayerController: AVPlayerViewController {
                     alert.message = "「Wi-Fi接続時のみ再生する」がONになっているため、モバイルネットワークでは再生できません"
                     alert.addAction(UIAlertAction(title: "OK",style: .default,handler: {
                         (action:UIAlertAction!) -> Void in
-                        controller.dismiss(animated: true, completion: nil)
+                        self.controller.dismiss(animated: true, completion: nil)
                         self.dismiss(animated: true, completion: nil)
                     }))
                     self.present(alert, animated: true, completion: nil)

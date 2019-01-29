@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
+import AVKit
 import SideMenu
 
 @UIApplicationMain
@@ -17,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var onseninfo: [String:[[String]]]!
     var hibikiInfo: [String:[[String]]]!
     let picarray = UserDefaults.standard.dictionary(forKey: "picarray")
+    var player: AVPlayer?
+    var controller: AVPlayerViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -32,6 +36,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SideMenuManager.default.menuWidth = max(round(min((UIScreen.main.bounds.width/2), (UIScreen.main.bounds.height/2))), 240)
         SideMenuManager.default.menuLeftNavigationController = NavigationDrawer
         
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback, mode: .default)
+            try audioSession.setActive(true)
+        } catch let error as NSError {
+            print(error)
+        }
         return true
     }
 
@@ -43,10 +54,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+       self.controller?.player = nil
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        self.controller?.player = self.player
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

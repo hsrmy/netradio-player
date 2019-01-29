@@ -18,7 +18,9 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var movieView: UIView!
     var infotable: UITableView!
     let reachability = Reachability()!
-    var player: AVPlayer!
+    var player: AVPlayer?
+    var controller: AVPlayerViewController!
+    let delegate = UIApplication.shared.delegate as! AppDelegate
     var toolbar: UIToolbar!
     var uisize: CGFloat!
     let table = UIBarButtonItem()
@@ -106,15 +108,17 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
             // プレイヤー部分
             let url = URL(string: "http://ic-www.uniqueradio.jp/iphone2/3G.m3u8")
             self.player = AVPlayer(url: url!)
-            let controller = AVPlayerViewController()
-            controller.player = self.player
-            controller.view.frame.size = self.movieView.frame.size
-            self.movieView.addSubview(controller.view)
-            self.addChild(controller)
+            self.controller = AVPlayerViewController()
+            self.controller.player = self.player
+            self.controller.view.frame.size = self.movieView.frame.size
+            self.movieView.addSubview(self.controller.view)
+            self.addChild(self.controller)
             
             self.getProgData()
             
-            self.player.play()
+            self.player?.play()
+            self.delegate.player = self.player
+            self.delegate.controller = self.controller
             if self.timer == nil {
                 self.timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.getProgData), userInfo: nil, repeats: true)
             }
@@ -216,10 +220,10 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
             DispatchQueue.main.async {
                 self.view.makeToast("再読込します", duration: 3)
             }
-            self.player.pause()
+            self.player?.pause()
             self.getProgData()
             sleep(4)
-            self.player.play()
+            self.player?.play()
         //終了ボタン
         case 1:
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
