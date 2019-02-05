@@ -10,7 +10,7 @@ import Foundation
 import Reachability
 import SwiftGifOrigin
 
-class LanchScreenController: UIViewController {
+class LaunchScreenController: UIViewController {
     let dow = ["sun","mon","tue","wed","thu","fri","sat"]
     var progressBar: UIProgressView! = nil
     let reachability = Reachability()!
