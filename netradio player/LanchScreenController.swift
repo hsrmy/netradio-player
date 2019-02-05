@@ -8,14 +8,11 @@
 
 import Foundation
 import Reachability
+import SwiftGifOrigin
 
 class LanchScreenController: UIViewController {
     let dow = ["sun","mon","tue","wed","thu","fri","sat"]
     var progressBar: UIProgressView! = nil
-    var loadingView: UIView!
-    var waitlabel: UILabel!
-    var indicator: UIActivityIndicatorView!
-    var detail: UILabel!
     let reachability = Reachability()!
     var delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     let defaults = UserDefaults.standard
@@ -36,26 +33,20 @@ class LanchScreenController: UIViewController {
         // ネットワーク接続がある時
         reachability.whenReachable = { reachability in
             self.setUI()
-            self.indicator.startAnimating()
             DispatchQueue.global().async {
                 self.getAgqr()
                 DispatchQueue.main.async {
-                    self.detail.text = "超!A&G+の番組情報の読み込み完了"
                     self.progressBar.setProgress(0.33, animated: true)
                 }
                 self.getOnsen()
                 DispatchQueue.main.async {
-                    self.detail.text = "音泉の番組情報の読み込み完了"
                     self.progressBar.setProgress(0.66, animated: true)
                 }
                 self.gethibiki()
                 DispatchQueue.main.async {
-                    self.detail.text = "響の番組情報の読み込み完了"
                     self.progressBar.setProgress(0.99, animated: true)
                 }
                 DispatchQueue.main.async {
-                    self.indicator.stopAnimating()
-                    
                     let next = ViewController()
                     let navi = UINavigationController(rootViewController: next)
                     self.present(navi, animated: false, completion: nil)
@@ -90,39 +81,28 @@ class LanchScreenController: UIViewController {
     
     func setUI() {
         // 画面の大きさよりー回り小さいviewを定義
-        self.loadingView = UIView()
-        self.loadingView.frame = CGRect(x: self.view.frame.width/10, y: self.view.frame.height/10, width: (self.view.frame.width/10)*8, height: (self.view.frame.height/10)*8)
+        let loadingView = UIView(frame: CGRect(x: self.view.frame.width/10, y: self.view.frame.height/10, width: (self.view.frame.width/10)*8, height: (self.view.frame.height/10)*8))
         self.view.addSubview(loadingView) // 画面の大きさよりー回り小さいviewをセット
         
-        // indicator(ローディングの時のクルクル回るやつ)の定義
-        indicator = UIActivityIndicatorView()
-        indicator.frame = loadingView.bounds
-        indicator.center = CGPoint(x: loadingView.bounds.width/2, y: (loadingView.bounds.height/2)+40)
-        indicator.style = UIActivityIndicatorView.Style.whiteLarge // 大きな白色
-        indicator.color = UIColor.blue
-        indicator.hidesWhenStopped = true // アニメーション停止と同時に隠す設定
-        loadingView.addSubview(indicator) // indicatorのセット
-        
-        waitlabel = UILabel()
-        waitlabel.textAlignment = .center
-        waitlabel.frame = loadingView.bounds
-        waitlabel.numberOfLines = 0
-        waitlabel.center = CGPoint(x: loadingView.bounds.width/2, y: indicator.center.y-100)
-        waitlabel.text = "起動中です\n必要なデータをダウンロードしてます\nしばらくお待ち下さい"
-        loadingView.addSubview(waitlabel) // ラベルのセット
+        let image = UIImageView(image: UIImage.gif(asset: "loading"))
+        image.center = CGPoint(x: loadingView.bounds.width/2, y: (loadingView.bounds.height/2))
+        loadingView.addSubview(image)
         
         progressBar = UIProgressView(progressViewStyle: .default)
-        progressBar.frame = loadingView.bounds
-        progressBar.center = CGPoint(x: loadingView.bounds.width/2, y: indicator.center.y+50)
+        progressBar.frame = image.frame
+        progressBar.center = CGPoint(x: image.center.x, y: image.frame.maxY+15)
         loadingView.addSubview(progressBar) // プログレスバーのセット
         
-        detail = UILabel()
-        detail.textAlignment = .center
-        detail.frame = loadingView.bounds
-        detail.center = CGPoint(x: loadingView.bounds.width/2, y: indicator.center.y+100)
-        detail.numberOfLines = 0
-        detail.text = "進捗: -"
-        loadingView.addSubview(detail) // ラベルのセット
+        let leftLabel = UILabel(frame: CGRect(x: image.frame.minX, y: image.frame.maxY+30, width: image.frame.width, height: 30))
+        leftLabel.text = "起動中です"
+        leftLabel.textAlignment = .left
+        
+        let rightLabel = UILabel(frame: CGRect(x: image.frame.minX, y: image.frame.maxY+30, width: image.frame.width, height: 30))
+        rightLabel.text = "しばらくお待ち下さい..."
+        rightLabel.textAlignment = .right
+        
+        loadingView.addSubview(leftLabel)
+        loadingView.addSubview(rightLabel)
     }
     
     func getAgqr() {

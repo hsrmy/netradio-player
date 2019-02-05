@@ -11,6 +11,7 @@ target 'netradio player' do
   pod 'ReachabilitySwift'
   pod 'FontAwesome.swift'
   pod 'SideMenu'
+  pod 'SwiftGifOrigin', '~> 1.7.0'
 
   target 'netradio playerTests' do
     inherit! :search_paths
