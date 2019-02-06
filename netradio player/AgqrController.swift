@@ -12,6 +12,7 @@ import AVFoundation
 import Reachability
 import FontAwesome_swift
 import SideMenu
+import MediaPlayer
 
 class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
     
@@ -104,6 +105,8 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.view.addSubview(movieView)
         self.view.addSubview(infotable)
         
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        
         reachability.whenReachable = { reachability in
             // プレイヤー部分
             let url = URL(string: "http://ic-www.uniqueradio.jp/iphone2/3G.m3u8")
@@ -114,14 +117,15 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.movieView.addSubview(self.controller.view)
             self.addChild(self.controller)
             
-            self.getProgData()
+            self.infoUpdater()
             
             self.player?.play()
             self.delegate.player = self.player
             self.delegate.controller = self.controller
             if self.timer == nil {
-                self.timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.getProgData), userInfo: nil, repeats: true)
+                self.timer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.infoUpdater), userInfo: nil, repeats: true)
             }
+            self.controller.updatesNowPlayingInfoCenter = false
         }
         
         reachability.whenUnreachable = { reachability in
@@ -140,6 +144,14 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } catch {
             print("Unable to start notifier")
         }
+        
+        let commandCenter = MPRemoteCommandCenter.shared()
+        commandCenter.playCommand.addTarget(self, action: #selector(self.Play(event:)))
+        commandCenter.playCommand.isEnabled = true
+        commandCenter.pauseCommand.addTarget(self, action: #selector(self.Stop(event:)))
+        commandCenter.pauseCommand.isEnabled = true
+        commandCenter.skipForwardCommand.isEnabled = false
+        commandCenter.skipBackwardCommand.isEnabled = false
     }
     
     override func didReceiveMemoryWarning() {
@@ -198,6 +210,14 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    @objc func Play(event: MPRemoteCommandEvent)  {
+        self.player?.play()
+    }
+    
+    @objc func Stop(event: MPRemoteCommandEvent)  {
+        self.player?.pause()
+    }
+    
     // 向きが変わったらframeをセットしなおして再描画
     @objc func onOrientationChange(notification: NSNotification){
         // UI部分(ステータスバー、ナビゲーションバー、ツールバー)のサイズ
@@ -229,7 +249,7 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.view.makeToast("再読込します", duration: 3)
             }
             self.player?.pause()
-            self.getProgData()
+            self.infoUpdater()
             sleep(4)
             self.player?.play()
         //終了ボタン
@@ -260,7 +280,8 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    @objc func getProgData() {
+    @objc func infoUpdater() {
+        // 番組情報取得
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         do {
@@ -285,6 +306,12 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } catch  {
             print(error)
         }
+        
+        // Now Playing
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+            MPMediaItemPropertyTitle: self.datas[0],
+            MPMediaItemPropertyArtist: self.datas[1],
+        ]
     }
     
     func Cast(strings:String) -> String {
