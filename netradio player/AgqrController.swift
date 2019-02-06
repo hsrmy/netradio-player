@@ -147,8 +147,16 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -244,6 +252,7 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
             timetable.popoverPresentationController?.permittedArrowDirections = .any
             timetable.popoverPresentationController?.delegate = self
             present(timetable, animated: true, completion: nil)
+        // 画面向き固定
         case 3:
             print()
         default:
@@ -299,7 +308,7 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.present(SideMenuManager.default.menuLeftNavigationController!, animated: true, completion: nil)
     }
     
-    // iPhoneで表示される場合に必要
+    // 番組表ポップアップがiPhoneで表示される場合に必要
     func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
         return .none
     }
