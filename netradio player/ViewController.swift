@@ -23,15 +23,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 if select == "agqr" { // 前回終了時の放送局がA&Gの場合
                     let agqr = AgqrController()
                     let navi = UINavigationController(rootViewController: agqr)
-                    self.present(navi, animated: false, completion: nil) // A&Gに飛ぶ
+                    self.present(navi, animated: true, completion: nil) // A&Gに飛ぶ
                 } else if select == "onsen" { // 前回終了時の放送局が音泉の場合
                     let onsen = OnsenListController()
                     let navi = UINavigationController(rootViewController: onsen)
-                    self.present(navi, animated: false, completion: nil) // 音泉に飛ぶ
+                    self.present(navi, animated: true, completion: nil) // 音泉に飛ぶ
                 } else if select == "hibiki" { // 前回終了時の放送局が響の場合
                     let hibiki = HibikiListController()
                     let navi = UINavigationController(rootViewController: hibiki)
-                    self.present(navi, animated: false, completion: nil) // 響に飛ぶ
+                    self.present(navi, animated: true, completion: nil) // 響に飛ぶ
                 }
             } else {
                 setUI()// 選局画面のUIを表示

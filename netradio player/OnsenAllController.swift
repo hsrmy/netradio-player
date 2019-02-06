@@ -12,12 +12,13 @@ import XLPagerTabStrip
 class OnsenAllController: UIViewController, IndicatorInfoProvider, UICollectionViewDataSource, UICollectionViewDelegate  {
     var delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     let dow = ["mon","tue","wed","thu","fri","sat"]
+    var collectionView: UICollectionView!
+    let layout = UICollectionViewFlowLayout()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let layout = UICollectionViewFlowLayout()
         if UIDevice.current.userInterfaceIdiom == .pad { // iPadの場合
             let size: CGFloat = (UIScreen.main.bounds.width - (25*3))/3
             layout.itemSize = CGSize(width: size, height: size)
@@ -32,7 +33,7 @@ class OnsenAllController: UIViewController, IndicatorInfoProvider, UICollectionV
         let uisize: CGFloat = UIApplication.shared.statusBarFrame.height + UINavigationController().navigationBar.frame.size.height + 50.0
         let framesize = UIScreen.main.bounds.size.height - uisize - UINavigationController().toolbar.frame.size.height
         
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: framesize), collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: framesize), collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.white
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         
@@ -45,6 +46,18 @@ class OnsenAllController: UIViewController, IndicatorInfoProvider, UICollectionV
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -96,5 +109,15 @@ class OnsenAllController: UIViewController, IndicatorInfoProvider, UICollectionV
         let onsen = OnsenPlayerController(name: title, url: url, thumbnail: thumbnail, personality: personality, caption: caption, count: count)
         let navi = UINavigationController(rootViewController: onsen)
         self.present(navi, animated: true, completion: nil)
+    }
+    
+    @objc func onOrientationChange(notification: NSNotification){
+        let uisize: CGFloat = UIApplication.shared.statusBarFrame.height + UINavigationController().navigationBar.frame.size.height + 50.0
+        let framesize = UIScreen.main.bounds.size.height - uisize - UINavigationController().toolbar.frame.size.height
+        
+        collectionView.frame = CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: framesize)
+        collectionView.backgroundColor = UIColor.white
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.reloadData()
     }
 }

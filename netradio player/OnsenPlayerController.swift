@@ -29,6 +29,8 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
     var uisize: CGFloat!
     let delegate = UIApplication.shared.delegate as! AppDelegate
     var Text = ["タイトル","パーソナリティ","番組説明"]
+    var rect: UIView!
+    var thumLayer: CALayer!
     
     init(name: String, url: String, thumbnail: Data, personality: String, caption: String, count: String) {
         self.name = name
@@ -113,18 +115,18 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
         reachability.whenReachable = { reachability in
             let url = URL(string: self.url)
             let thumImage: UIImage = UIImage(data: self.thumbnail)!
-            let thumLayer: CALayer = CALayer()
-            let rect = UIView(frame: CGRect(x: 0, y: 0, width: self.movieView.frame.width, height: self.movieView.frame.height))
-            thumLayer.frame = rect.frame
-            thumLayer.contents = thumImage.cgImage
-            thumLayer.contentsGravity = CALayerContentsGravity.center
-            thumLayer.position = rect.center
+            self.thumLayer = CALayer()
+            self.rect = UIView(frame: CGRect(x: 0, y: 0, width: self.movieView.frame.width, height: self.movieView.frame.height))
+            self.thumLayer.frame = self.rect.frame
+            self.thumLayer.contents = thumImage.cgImage
+            self.thumLayer.contentsGravity = CALayerContentsGravity.center
+            self.thumLayer.position = self.rect.center
         
             self.player = AVPlayer(url: url!)
             self.controller = AVPlayerViewController()
             self.controller.player = self.player
             self.controller.view.frame.size = self.movieView.frame.size
-            self.controller.view.layer.addSublayer(thumLayer)
+            self.controller.view.layer.addSublayer(self.thumLayer)
             self.movieView.addSubview(self.controller.view)
             self.addChild(self.controller)
         
@@ -172,6 +174,18 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -238,6 +252,31 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @objc func goback() {
-        self.navigationController?.popViewController(animated: true)
+        self.player?.pause()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func onOrientationChange(notification: NSNotification){
+        // UI部分(ステータスバー、ナビゲーションバー、ツールバー)のサイズ
+        let uisize: CGFloat = UIApplication.shared.statusBarFrame.height + UINavigationController().navigationBar.frame.size.height + UINavigationController().toolbar.frame.size.height
+        let framesize = (UIScreen.main.bounds.size.height - uisize)/2
+        
+        let orientation = UIDevice.current.orientation
+        if(orientation.isPortrait) { //縦
+            self.movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
+            self.infotable.frame = CGRect(x: 0, y: framesize+uisize-UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
+        } else if (orientation.isLandscape) { //横
+            self.movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-uisize)
+            self.infotable.frame = CGRect(x: UIScreen.main.bounds.size.width/2, y: 0, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-UINavigationController().toolbar.frame.size.height)
+        }
+        let toolbar_y = self.view.bounds.size.height - (self.navigationController?.toolbar.frame.size.height)!
+        self.toolbar.frame = CGRect(x: 0, y:
+            toolbar_y, width: self.view.bounds.size.width, height: (self.navigationController?.toolbar.frame.size.height)!)
+        self.rect.frame = CGRect(x: 0, y: 0, width: self.movieView.frame.width, height: self.movieView.frame.height)
+        self.thumLayer.frame = self.rect.frame
+        
+        self.movieView.setNeedsDisplay()
+        self.infotable.setNeedsDisplay()
+        self.toolbar.setNeedsDisplay()
     }
 }
