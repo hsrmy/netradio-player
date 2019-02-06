@@ -44,6 +44,18 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.row[section].count
     }
@@ -139,6 +151,12 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         table.reloadData()
     }
     
+    @objc func onOrientationChange(notification: NSNotification){
+        table.frame = self.view.bounds
+        table.setNeedsDisplay()
+        table.reloadData()
+    }
+    
     deinit {
         // UserDefaultsの変更の監視を解除する
         NotificationCenter.default.removeObserver(self, name: UserDefaults.didChangeNotification, object: nil)
@@ -178,6 +196,18 @@ class ReservationEditController: UIViewController, UITableViewDelegate, UITableV
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -305,5 +335,11 @@ class ReservationEditController: UIViewController, UITableViewDelegate, UITableV
     
     @objc func goback() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func onOrientationChange(notification: NSNotification){
+        table.frame = self.view.bounds
+        table.setNeedsDisplay()
+        table.reloadData()
     }
 }
