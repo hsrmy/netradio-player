@@ -11,6 +11,7 @@ import AVKit
 import AVFoundation
 import Reachability
 import SideMenu
+import MediaPlayer
 
 class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var name: String = ""
@@ -30,7 +31,7 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
     let delegate = UIApplication.shared.delegate as! AppDelegate
     var Text = ["タイトル","パーソナリティ","番組説明"]
     var rect: UIView!
-    var thumLayer: CALayer!
+    var image: UIImageView!
     
     init(name: String, url: String, thumbnail: Data, personality: String, caption: String, count: String) {
         self.name = name
@@ -51,6 +52,10 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
         // Do any additional setup after loading the view, typically from a nib.
         
         self.view.backgroundColor = UIColor.white
+        
+        if delegate.player?.rate == 1.0 {
+            delegate.player?.pause()
+        }
         
         //ナビゲーションバーの設定
         self.title = "\(name) 第\(count)回"
@@ -93,6 +98,9 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
         infotable.estimatedRowHeight = 50
         infotable.rowHeight = UITableView.automaticDimension
         
+        let thumImage: UIImage = UIImage(data: self.thumbnail)!
+        self.image = UIImageView(image: thumImage)
+        
         // UI部分(ステータスバー、ナビゲーションバー、ツールバー)のサイズ
         uisize = UIApplication.shared.statusBarFrame.height + UINavigationController().navigationBar.frame.size.height + UINavigationController().toolbar.frame.size.height
         let framesize = (UIScreen.main.bounds.size.height - uisize)/2
@@ -101,9 +109,11 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
         if (orientation.isPortrait) { //縦
             self.movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
             self.infotable.frame = CGRect(x: 0, y: framesize+uisize-UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
+            self.image.center = CGPoint(x: UIScreen.main.bounds.width/2, y: (UIScreen.main.bounds.height-self.uisize)/4)
         } else if (orientation.isLandscape) { //横
             self.movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-uisize)
             self.infotable.frame = CGRect(x: UIScreen.main.bounds.size.width/2, y: uisize-UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-uisize)
+            self.image.center = CGPoint(x: UIScreen.main.bounds.width/4, y: (UIScreen.main.bounds.height-self.uisize)/2)
         }
         
         let footer = UIView(frame: CGRect.zero)
@@ -112,22 +122,18 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
         self.view.addSubview(movieView)
         self.view.addSubview(infotable)
         
+        UIApplication.shared.beginReceivingRemoteControlEvents()
+        
         reachability.whenReachable = { reachability in
             let url = URL(string: self.url)
-            let thumImage: UIImage = UIImage(data: self.thumbnail)!
-            self.thumLayer = CALayer()
-            self.rect = UIView(frame: CGRect(x: 0, y: 0, width: self.movieView.frame.width, height: self.movieView.frame.height))
-            self.thumLayer.frame = self.rect.frame
-            self.thumLayer.contents = thumImage.cgImage
-            self.thumLayer.contentsGravity = CALayerContentsGravity.center
-            self.thumLayer.position = self.rect.center
-        
+            
             self.player = AVPlayer(url: url!)
             self.controller = AVPlayerViewController()
             self.controller.player = self.player
             self.controller.view.frame.size = self.movieView.frame.size
-            self.controller.view.layer.addSublayer(self.thumLayer)
+            
             self.movieView.addSubview(self.controller.view)
+            self.movieView.addSubview(self.image)
             self.addChild(self.controller)
         
             if self.defaults.bool(forKey: "force_wifi") == true {
@@ -151,6 +157,7 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
                 self.delegate.player = self.player
                 self.delegate.controller = self.controller
             }
+            self.controller.updatesNowPlayingInfoCenter = false
         }
         
         reachability.whenUnreachable = { reachability in
@@ -169,6 +176,24 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
         } catch {
             print("Unable to start notifier")
         }
+        
+        let commandCenter = MPRemoteCommandCenter.shared()
+        commandCenter.playCommand.addTarget(self, action: #selector(self.Play(event:)))
+        commandCenter.playCommand.isEnabled = true
+        commandCenter.pauseCommand.addTarget(self, action: #selector(self.Stop(event:)))
+        commandCenter.pauseCommand.isEnabled = true
+        commandCenter.skipForwardCommand.isEnabled = false
+        commandCenter.skipBackwardCommand.isEnabled = false
+            
+        // Now Playing
+        let artwork = MPMediaItemArtwork.init(boundsSize: thumImage.size, requestHandler: { (size) -> UIImage in
+            return thumImage
+        })
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+            MPMediaItemPropertyTitle: self.title!,
+            MPMediaItemPropertyArtist: self.personality,
+            MPMediaItemPropertyArtwork: artwork
+        ]
     }
     
     override func didReceiveMemoryWarning() {
@@ -198,6 +223,7 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "cell")
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         if indexPath.section == 0 {
             cell.textLabel?.text = self.title
         } else if indexPath.section == 1 {
@@ -211,6 +237,14 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return Text[section]
+    }
+    
+    @objc func Play(event: MPRemoteCommandEvent)  {
+        self.player?.play()
+    }
+    
+    @objc func Stop(event: MPRemoteCommandEvent)  {
+        self.player?.pause()
     }
     
     @objc func onTapToolbar(sender: UIButton){
@@ -252,7 +286,6 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     @objc func goback() {
-        self.player?.pause()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -265,15 +298,15 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
         if(orientation.isPortrait) { //縦
             self.movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
             self.infotable.frame = CGRect(x: 0, y: framesize+uisize-UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
+            self.image.center = CGPoint(x: UIScreen.main.bounds.width/2, y: (UIScreen.main.bounds.height-self.uisize)/4)
         } else if (orientation.isLandscape) { //横
             self.movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-uisize)
             self.infotable.frame = CGRect(x: UIScreen.main.bounds.size.width/2, y: 0, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-UINavigationController().toolbar.frame.size.height)
+            self.image.center = CGPoint(x: UIScreen.main.bounds.width/4, y: (UIScreen.main.bounds.height-self.uisize)/2)
         }
         let toolbar_y = self.view.bounds.size.height - (self.navigationController?.toolbar.frame.size.height)!
         self.toolbar.frame = CGRect(x: 0, y:
             toolbar_y, width: self.view.bounds.size.width, height: (self.navigationController?.toolbar.frame.size.height)!)
-        self.rect.frame = CGRect(x: 0, y: 0, width: self.movieView.frame.width, height: self.movieView.frame.height)
-        self.thumLayer.frame = self.rect.frame
         
         self.movieView.setNeedsDisplay()
         self.infotable.setNeedsDisplay()
