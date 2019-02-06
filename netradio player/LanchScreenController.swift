@@ -49,7 +49,7 @@ class LaunchScreenController: UIViewController {
                 DispatchQueue.main.async {
                     let next = ViewController()
                     let navi = UINavigationController(rootViewController: next)
-                    self.present(navi, animated: false, completion: nil)
+                    self.present(navi, animated: true, completion: nil)
                 }
             }
         }

@@ -54,7 +54,7 @@ class OnsenListController: ButtonBarPagerTabStripViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-//        NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIApplication.didChangeStatusBarOrientationNotification, object: nil)
     }
     
     override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
@@ -77,13 +77,7 @@ class OnsenListController: ButtonBarPagerTabStripViewController {
     
     // 向きが変わったらframeをセットしなおして再描画
     @objc func onOrientationChange(notification: NSNotification){
-        // UI(ステータスバーとナビゲーションバー)の高さ
-        let uisize: CGFloat = UIApplication.shared.statusBarFrame.height + UINavigationController().navigationBar.frame.size.height
-        let framesize = UIScreen.main.bounds.size.height - uisize // フレームの大きさの高さ
-        // フレームの大きさをビューの大きさに
-//        progTable.frame = CGRect(x: 0, y: uisize, width: UIScreen.main.bounds.size.width, height: framesize)
-//        
-//        progTable.setNeedsLayout()
+        self.view.setNeedsLayout()
     }
     
     @objc func onTapToolbar(sender: UIButton){

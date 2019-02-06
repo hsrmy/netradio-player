@@ -104,8 +104,11 @@ class OnsenTodayController: UIViewController, UICollectionViewDataSource, UIColl
         let thumbnail = delegate.picarray!["onsen-\(prog[0])"] as! Data
         let title = prog[1]
         let url = prog[4]
+        let personality = prog[2]
+        let caption = prog[3]
+        let count = prog[6]
         
-        let onsen = OnsenPlayerController(name: title, url: url, thumbnail: thumbnail)
+        let onsen = OnsenPlayerController(name: title, url: url, thumbnail: thumbnail, personality: personality, caption: caption, count: count)
         let navi = UINavigationController(rootViewController: onsen)
         self.present(navi, animated: true, completion: nil)
     }
