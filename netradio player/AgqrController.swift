@@ -39,6 +39,9 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.view.backgroundColor = UIColor.white
         
+        if delegate.player?.rate == 1.0 {
+            delegate.player?.pause()
+        }
         //ナビゲーションバーの設定
         self.title = "超!A&G"
         let top_reload = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.onTapToolbar(sender:)))

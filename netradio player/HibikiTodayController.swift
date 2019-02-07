@@ -105,7 +105,7 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
         let prog = delegate.hibikiInfo[dow[today_dow]]![indexPath.row]
         let thumbnail = delegate.picarray!["hibiki-\(prog[0])"] as! Data
         
-        let hibiki = HibikiPlayerController(id: prog[4], name: prog[1], thumbnail: thumbnail)
+        let hibiki = HibikiPlayerController(id: prog[4], name: prog[1], personality: prog[2], thumbnail: thumbnail, caption: prog[3])
         let navi = UINavigationController(rootViewController: hibiki)
         self.present(navi, animated: true, completion: nil)
     }
