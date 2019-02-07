@@ -101,6 +101,23 @@ class DayTimetableController: UIViewController, UITableViewDelegate, UITableView
         self.view.addSubview(table)
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return delegate.agqrinfo[day]!.count
     }
@@ -187,5 +204,14 @@ class DayTimetableController: UIViewController, UITableViewDelegate, UITableView
             }
         }))
         self.present(dialog, animated: true, completion: nil)
+    }
+    
+    @objc func onOrientationChange(notification: NSNotification){
+        if self.full == true {
+            let framesize = UIScreen.main.bounds.size.height - UIApplication.shared.statusBarFrame.height - UINavigationController().navigationBar.frame.size.height
+            table.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: framesize)
+            table.setNeedsDisplay()
+            table.reloadData()
+        }
     }
 }
