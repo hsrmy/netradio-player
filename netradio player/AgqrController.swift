@@ -71,13 +71,8 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         table.tag = 2
         let buttom_reload = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.onTapToolbar(sender:)))
         buttom_reload.tag = 0
-        let lock = UIBarButtonItem()
-        lock.image = UIImage.fontAwesomeIcon(name: .unlockAlt, style: .solid, textColor: .blue, size: CGSize(width: 26, height: 26))
-        lock.target = self
-        lock.action = #selector(self.onTapToolbar(sender:))
-        lock.tag = 3
         
-        toolbar.items = [exit,spacer,table,spacer,buttom_reload,spacer,lock]
+        toolbar.items = [exit,spacer,table,spacer,buttom_reload]
         
         self.view.addSubview(toolbar)
         
@@ -94,12 +89,12 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let framesize = (UIScreen.main.bounds.size.height - uisize)/2
         
         let orientation = UIDevice.current.orientation
-        if (orientation.isPortrait) { //縦
-            self.movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
-            self.infotable.frame = CGRect(x: 0, y: framesize+uisize-UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
-        } else if (orientation.isLandscape) { //横
+        if (orientation.isLandscape) { //横
             self.movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-uisize)
             self.infotable.frame = CGRect(x: UIScreen.main.bounds.size.width/2, y: uisize-UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width/2, height: UIScreen.main.bounds.size.height-uisize)
+        } else { // 縦
+            self.movieView.frame = CGRect(x: 0, y: uisize - UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
+            self.infotable.frame = CGRect(x: 0, y: framesize+uisize-UINavigationController().toolbar.frame.size.height, width: UIScreen.main.bounds.size.width, height: framesize)
         }
         
         let footer = UIView(frame: CGRect.zero)
