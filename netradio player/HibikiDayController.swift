@@ -12,6 +12,7 @@ import XLPagerTabStrip
 class HibikiDayController: UIViewController, IndicatorInfoProvider, UICollectionViewDataSource, UICollectionViewDelegate {
     var delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     var day: String = ""
+    var collectionView: UICollectionView!
     
     init(day: String) {
         self.day = day
@@ -41,7 +42,7 @@ class HibikiDayController: UIViewController, IndicatorInfoProvider, UICollection
         let uisize: CGFloat = UIApplication.shared.statusBarFrame.height + UINavigationController().navigationBar.frame.size.height + 50.0
         let framesize = UIScreen.main.bounds.size.height - uisize - UINavigationController().toolbar.frame.size.height
         
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: framesize), collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: framesize), collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.white
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         
@@ -54,6 +55,18 @@ class HibikiDayController: UIViewController, IndicatorInfoProvider, UICollection
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -110,5 +123,17 @@ class HibikiDayController: UIViewController, IndicatorInfoProvider, UICollection
         let hibiki = HibikiPlayerController(id: prog[4], name: prog[1], personality: prog[2], thumbnail: thumbnail, caption: prog[3])
         let navi = UINavigationController(rootViewController: hibiki)
         self.present(navi, animated: true, completion: nil)
+    }
+    
+    // 向きが変わったらframeをセットしなおして再描画
+    @objc func onOrientationChange(notification: NSNotification){
+        let uisize: CGFloat = UIApplication.shared.statusBarFrame.height + UINavigationController().navigationBar.frame.size.height + 50.0
+        let framesize = UIScreen.main.bounds.size.height - uisize - UINavigationController().toolbar.frame.size.height
+        
+        collectionView.frame = CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: framesize)
+        collectionView.backgroundColor = UIColor.white
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.setNeedsDisplay()
+        collectionView.reloadData()
     }
 }

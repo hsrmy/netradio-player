@@ -13,6 +13,7 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
     var today_dow: Int!
     var delegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
     let dow = ["mon","tue","wed","thu","fri","sat"]
+    var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +44,7 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
         let uisize: CGFloat = UIApplication.shared.statusBarFrame.height + UINavigationController().navigationBar.frame.size.height + 10.0
         let framesize = UIScreen.main.bounds.size.height - uisize - UINavigationController().toolbar.frame.size.height
         
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: framesize), collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: framesize), collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.white
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         
@@ -56,6 +57,16 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc func onOrientationChange(notification: NSNotification){
+        let uisize: CGFloat = UIApplication.shared.statusBarFrame.height + UINavigationController().navigationBar.frame.size.height + 50.0
+        let framesize = UIScreen.main.bounds.size.height - uisize - UINavigationController().toolbar.frame.size.height
+        
+        collectionView.frame = CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: framesize)
+        collectionView.backgroundColor = UIColor.white
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -12,6 +12,7 @@ import FontAwesome_swift
 import SideMenu
 
 class OnsenListController: ButtonBarPagerTabStripViewController {
+    var toolbar: UIToolbar!
     
     override func viewDidLoad() {
         settings.style.buttonBarBackgroundColor = UIColor.blue
@@ -37,7 +38,7 @@ class OnsenListController: ButtonBarPagerTabStripViewController {
         self.navigationItem.leftBarButtonItem = drawer_button
         
         let toolbar_y = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - UINavigationController().navigationBar.frame.size.height - settings.style.buttonBarHeight!
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y:
+        toolbar = UIToolbar(frame: CGRect(x: 0, y:
             toolbar_y, width: self.view.bounds.size.width, height: (self.navigationController?.toolbar.frame.size.height)!))
         toolbar.barStyle = .default
         
@@ -84,6 +85,11 @@ class OnsenListController: ButtonBarPagerTabStripViewController {
     
     // 向きが変わったらframeをセットしなおして再描画
     @objc func onOrientationChange(notification: NSNotification){
+        let toolbar_y = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - UINavigationController().navigationBar.frame.size.height - settings.style.buttonBarHeight!
+        toolbar.frame = CGRect(x: 0, y:
+            toolbar_y, width: self.view.bounds.size.width, height: (self.navigationController?.toolbar.frame.size.height)!)
+        
+        self.toolbar.setNeedsDisplay()
         self.view.setNeedsLayout()
     }
     

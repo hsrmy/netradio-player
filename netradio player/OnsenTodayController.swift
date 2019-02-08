@@ -125,7 +125,7 @@ class OnsenTodayController: UIViewController, UICollectionViewDataSource, UIColl
     
     @objc func onOrientationChange(notification: NSNotification){
         let uisize: CGFloat = UIApplication.shared.statusBarFrame.height + UINavigationController().navigationBar.frame.size.height + 50.0
-        let framesize = UIScreen.main.bounds.size.height - uisize - UINavigationController().toolbar.frame.size.height
+        let framesize = UIScreen.main.bounds.size.height - uisize
         
         collectionView.frame = CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: framesize)
         collectionView.backgroundColor = UIColor.white

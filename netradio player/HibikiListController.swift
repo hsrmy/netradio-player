@@ -12,6 +12,7 @@ import XLPagerTabStrip
 import SideMenu
 
 class HibikiListController: ButtonBarPagerTabStripViewController {
+    var toolbar: UIToolbar!
     
     override func viewDidLoad() {
         settings.style.buttonBarBackgroundColor = UIColor.blue
@@ -38,7 +39,7 @@ class HibikiListController: ButtonBarPagerTabStripViewController {
         self.navigationItem.leftBarButtonItem = drawer_button
         
         let toolbar_y = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - UINavigationController().navigationBar.frame.size.height - settings.style.buttonBarHeight!
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y:
+        toolbar = UIToolbar(frame: CGRect(x: 0, y:
             toolbar_y, width: self.view.bounds.size.width, height: (self.navigationController?.toolbar.frame.size.height)!))
         toolbar.barStyle = .default
         
@@ -68,7 +69,15 @@ class HibikiListController: ButtonBarPagerTabStripViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)),name: UIDevice.orientationDidChangeNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
     }
     
     @objc func showDrawer() {
@@ -91,5 +100,13 @@ class HibikiListController: ButtonBarPagerTabStripViewController {
             print("error")
         }
     }
-    
+ 
+    @objc func onOrientationChange(notification: NSNotification){
+         let toolbar_y = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - UINavigationController().navigationBar.frame.size.height - settings.style.buttonBarHeight!
+        toolbar.frame = CGRect(x: 0, y:
+            toolbar_y, width: self.view.bounds.size.width, height: (self.navigationController?.toolbar.frame.size.height)!)
+        
+        self.toolbar.setNeedsDisplay()
+        self.view.setNeedsLayout()
+    }
 }
