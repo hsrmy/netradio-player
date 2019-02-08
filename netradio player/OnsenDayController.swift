@@ -117,7 +117,6 @@ class OnsenDayController: UIViewController, IndicatorInfoProvider, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //        let cell = collectionView.cellForItem(at: indexPath)
         let prog =  delegate.onseninfo[day]![indexPath.row]
         let thumbnail = delegate.picarray!["onsen-\(prog[0])"] as! Data
         let title = prog[1]

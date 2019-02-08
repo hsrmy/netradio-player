@@ -50,13 +50,7 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        let toolbar_y = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - UINavigationController().navigationBar.frame.size.height
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y:
-            toolbar_y, width: self.view.bounds.size.width, height: (self.navigationController?.toolbar.frame.size.height)!))
-        toolbar.barStyle = .default
-        
         self.view.addSubview(collectionView)
-        self.view.addSubview(toolbar)
     }
     
     override func didReceiveMemoryWarning() {
@@ -101,7 +95,6 @@ class HibikiTodayController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //        let cell = collectionView.cellForItem(at: indexPath)
         let prog = delegate.hibikiInfo[dow[today_dow]]![indexPath.row]
         let thumbnail = delegate.picarray!["hibiki-\(prog[0])"] as! Data
         

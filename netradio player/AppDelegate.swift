@@ -69,18 +69,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
-}
-
-extension UINavigationController {
-    open override var shouldAutorotate: Bool {
-        guard let viewController = self.visibleViewController else { return true }
-        return viewController.shouldAutorotate
-    }
-    
-    open override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        guard let viewController = self.visibleViewController else { return .all }
-        return viewController.supportedInterfaceOrientations
-    }
 }

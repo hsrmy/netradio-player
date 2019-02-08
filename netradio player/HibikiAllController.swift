@@ -84,7 +84,6 @@ class HibikiAllController: UIViewController, IndicatorInfoProvider, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //        let cell = collectionView.cellForItem(at: indexPath)
         let prog =  delegate.hibikiInfo[dow[indexPath.section]]![indexPath.row]
         let thumbnail = delegate.picarray!["hibiki-\(prog[0])"] as! Data
         

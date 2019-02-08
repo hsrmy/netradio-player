@@ -275,9 +275,6 @@ class AgqrController: UIViewController, UITableViewDelegate, UITableViewDataSour
             timetable.popoverPresentationController?.permittedArrowDirections = .any
             timetable.popoverPresentationController?.delegate = self
             present(timetable, animated: true, completion: nil)
-        // 画面向き固定
-        case 3:
-            print()
         default:
             print("error")
         }

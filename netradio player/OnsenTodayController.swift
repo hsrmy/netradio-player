@@ -41,7 +41,7 @@ class OnsenTodayController: UIViewController, UICollectionViewDataSource, UIColl
         layout.sectionInset = UIEdgeInsets(top: 10, left: 20, bottom: 20, right: 20)
         
         let uisize: CGFloat = UIApplication.shared.statusBarFrame.height + UINavigationController().navigationBar.frame.size.height + 10.0
-        let framesize = UIScreen.main.bounds.size.height - uisize - UINavigationController().toolbar.frame.size.height
+        let framesize = UIScreen.main.bounds.size.height - uisize
         
         collectionView = UICollectionView(frame: CGRect(x: 0, y: 10, width: UIScreen.main.bounds.width, height: framesize), collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.white
@@ -50,13 +50,7 @@ class OnsenTodayController: UIViewController, UICollectionViewDataSource, UIColl
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        let toolbar_y = UIScreen.main.bounds.height - UIApplication.shared.statusBarFrame.height - UINavigationController().navigationBar.frame.size.height
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y:
-            toolbar_y, width: self.view.bounds.size.width, height: (self.navigationController?.toolbar.frame.size.height)!))
-        toolbar.barStyle = .default
-        
         self.view.addSubview(collectionView)
-        self.view.addSubview(toolbar)
     }
     
     override func didReceiveMemoryWarning() {
@@ -112,7 +106,6 @@ class OnsenTodayController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //        let cell = collectionView.cellForItem(at: indexPath)
         let prog = delegate.onseninfo[dow[today_dow]]![indexPath.row]
         let thumbnail = delegate.picarray!["onsen-\(prog[0])"] as! Data
         let title = prog[1]

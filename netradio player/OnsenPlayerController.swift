@@ -77,16 +77,10 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
         toolbar.barStyle = .default
         
         //ツールバーの項目
-        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let exit = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(self.onTapToolbar(sender:)))
         exit.tag = 0
-        let lock = UIBarButtonItem()
-        lock.image = UIImage.fontAwesomeIcon(name: .unlockAlt, style: .solid, textColor: .blue, size: CGSize(width: 26, height: 26))
-        lock.target = self
-        lock.action = #selector(self.onTapToolbar(sender:))
-        lock.tag = 1
         
-        toolbar.items = [exit,spacer,lock]
+        toolbar.items = [exit]
         
         self.view.addSubview(toolbar)
         
@@ -259,23 +253,6 @@ class OnsenPlayerController: UIViewController, UITableViewDataSource, UITableVie
             }))
             alert.addAction(UIAlertAction(title: "キャンセル",style: .cancel,handler: nil))
             self.present(alert, animated: true, completion: nil)
-        // 画面向き固定
-        case 1:
-            if self.shouldAutorotate == true { // 画面回転をさせないようにする
-                var shouldAutorotate: Bool {
-                    get {
-                        return false
-                    }
-                }
-                self.view.makeToast("画面回転を固定にしました")
-            } else { // 画面回転をするにする
-                var shouldAutorotate: Bool {
-                    get {
-                        return true
-                    }
-                }
-                self.view.makeToast("画面回転を自由にしました")
-            }
         default:
             print("error")
         }

@@ -99,12 +99,11 @@ class HibikiDayController: UIViewController, IndicatorInfoProvider, UICollection
         label.text = "\(prog[1])\n\n\(prog[2])"
         label.numberOfLines = 0
         cell.contentView.addSubview(label)
-//
+
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let cell = collectionView.cellForItem(at: indexPath)
         let prog =  delegate.hibikiInfo[day]![indexPath.row]
         let thumbnail = delegate.picarray!["hibiki-\(prog[0])"] as! Data
         

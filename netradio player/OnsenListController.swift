@@ -41,9 +41,9 @@ class OnsenListController: ButtonBarPagerTabStripViewController {
             toolbar_y, width: self.view.bounds.size.width, height: (self.navigationController?.toolbar.frame.size.height)!))
         toolbar.barStyle = .default
         
-        let table = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(self.onTapToolbar(sender:)))
-        table.tag = 2
-        toolbar.items = [table]
+         let exit = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(self.onTapToolbar(sender:)))
+        exit.tag = 0
+        toolbar.items = [exit]
         self.view.addSubview(toolbar)
     }
     
@@ -89,9 +89,16 @@ class OnsenListController: ButtonBarPagerTabStripViewController {
     
     @objc func onTapToolbar(sender: UIButton){
         switch(sender.tag){
-        //更新ボタン
-        case 2:
-            print("tapped")
+        // 終了ボタン
+        case 0:
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            alert.title = "確認"
+            alert.message = "アプリを終了しますか?"
+            alert.addAction(UIAlertAction(title: "はい",style: .destructive,handler: {
+                (action:UIAlertAction!) -> Void in exit(0)
+            }))
+            alert.addAction(UIAlertAction(title: "キャンセル",style: .cancel,handler: nil))
+            self.present(alert, animated: true, completion: nil)
         default:
             print("error")
         }
